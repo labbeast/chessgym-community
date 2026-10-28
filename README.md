@@ -31,7 +31,7 @@ With the Lichess explorer connected, ChessGym can scan for **gaps in your repert
 
 ![Opening explorer with move percentages and estimated branch probability](docs/images/opening-explorer.png)
 
-The screenshot uses a labelled sample of 500 public Lichess games from January 2013 (CC0), with 18 games reaching the position shown. Its percentages illustrate that sample.
+The screenshot compares actual Lichess player and Masters statistics for the position shown. The player column uses rapid games rated 1600–1999; the Masters column uses a separate master-game population.
 
 You can also turn a position or pattern into a personal spaced-repetition exercise. From a solved puzzle, its solution is already filled in: when the proposed review database is the one you want, **Create exercise → Create exercise** is a two-click save. For a position taken from your own analysis, you enter the solution and choose its destination before saving.
 
@@ -80,9 +80,15 @@ If you prefer to keep it in a terminal:
 
 Press Ctrl+C in that terminal to stop it.
 
-## A local application
+## Your computer and private devices
 
-ChessGym serves its interface to a browser on the **same computer**. It is self-hosted in this local sense: your study data lives in your installation, and you control the source. This alpha does not offer LAN access, remote hosting or multiple users. The supplied launcher binds to loopback, and non-local requests are refused.
+ChessGym runs on your computer and keeps your study data there. By default, it opens only on that computer, without an account or login. You can optionally enable **Settings → Private access** to use the same library from your phone on a trusted home network or through a private Tailscale connection. A personal pairing link authorizes your device; it does not create a second user account. The host computer stays on and runs the engines.
+
+To start, enable private access on the host, stop and restart ChessGym, then copy the appropriate Wi-Fi or Tailscale pairing link to your phone. For access away from home, connect both devices to your private Tailscale network. **Revoke devices** replaces the pairing link and disconnects previously paired devices. See the [phone access guide](USAGE.md#phone-access-on-a-private-network) for setup and connection checks.
+
+<img src="docs/images/mobile.png" alt="ChessGym board and opening explorer in a phone-sized browser viewport" width="320">
+
+Phone-sized layout preview, captured with browser viewport emulation.
 
 External requests are made when you choose online features, such as resource downloads, public-game synchronization or an online opening explorer. Engine calculations and local PGN study run locally. No AI service is required to use ChessGym.
 

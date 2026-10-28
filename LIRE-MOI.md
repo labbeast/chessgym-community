@@ -6,7 +6,7 @@
 
 ChessGym réunit ta bibliothèque PGN, ton échiquier d’analyse et tes révisions dans une application locale et open source. Tes données et ta progression sont conservées sur ce PC. Le projet se construit pour les joueurs, avec les joueurs : retours, traductions, essais et contributions sont les bienvenus dans le [guide de contribution](CONTRIBUTING.md).
 
-Cette première préversion sert à utiliser l’application et à recueillir des retours. Elle s’utilise directement sur cet ordinateur, sans compte, mot de passe ni écran de connexion. L’accès depuis le réseau est refusé. Une installation existante conserve son profil, ses bases, ses réglages, ses brouillons et sa progression. Les fonctions et formats pourront encore évoluer pendant la phase alpha; conserve une sauvegarde personnelle vérifiée avant de mettre à jour une installation existante. Linux dispose d’instructions d’installation, mais n’a pas encore été validé par un parcours complet de bout en bout.
+Cette première préversion sert à utiliser l’application et à recueillir des retours. Elle s’utilise directement sur cet ordinateur, sans compte, mot de passe ni écran de connexion. L’accès depuis le réseau est désactivé par défaut. Un mode privé facultatif permet d’associer ton téléphone pour utiliser la même bibliothèque sur ton réseau local ou avec Tailscale. Une installation existante conserve son profil, ses bases, ses réglages, ses brouillons et sa progression. Les fonctions et formats pourront encore évoluer pendant la phase alpha; conserve une sauvegarde personnelle vérifiée avant de mettre à jour une installation existante. Linux dispose d’instructions d’installation, mais n’a pas encore été validé par un parcours complet de bout en bout.
 
 Les douze langues proposées couvrent l’ensemble du catalogue de l’interface, y compris l’installation et les réglages avancés. Les exemples pédagogiques inclus conservent leurs commentaires en français et en anglais.
 
@@ -26,6 +26,23 @@ Si tu utilises l’archive des sources de cette version, extrais-la puis commenc
 Lance ensuite **Demarrer ChessGym.cmd**. Stockfish et les autres ressources se choisissent dans l’assistant à la première ouverture. La bibliothèque, les révisions de coups et la lecture fonctionnent sans moteur. Les méthodes d’installation manuelle restent dans le [guide d’installation](README.md#install-on-windows).
 
 Le dépôt contient le code et ses ressources d’interface. Les données personnelles, identifiants, sauvegardes, grandes bases, banque de puzzles, environnements Python et moteurs installés sont exclus. Une installation neuve ouvre une bibliothèque vide. Le code source propre à ChessGym est sous **GNU AGPL version 3 ou ultérieure** (`AGPL-3.0-or-later`), sauf mention contraire dans un fichier ou une notice tierce; le texte intégral figure dans [LICENSE](LICENSE). Il peut être redistribué et modifié selon ces conditions, sans aucune garantie. Les composants tiers conservent leurs licences respectives, détaillées dans [leurs notices](THIRD-PARTY-NOTICES.md). Le logo a été généré avec ChatGPT à partir du prompt du responsable du projet; ses variantes d’icônes ont la même provenance. Ces ressources du projet sont incluses sous AGPL-3.0-or-later dans la mesure où des droits applicables existent.
+
+## Utiliser ton téléphone sur un réseau privé
+
+Le PC conserve les données et fait tourner les moteurs; il doit rester allumé avec ChessGym ouvert. Ton téléphone utilise la même bibliothèque et la même progression, sans créer un autre compte.
+
+1. Sur le PC, ouvre **Réglages → Accès privé** et active **Accès depuis un téléphone**.
+2. Arrête puis redémarre ChessGym lorsque le réglage le demande. Fermer seulement l’onglet du navigateur ne redémarre pas l’application.
+3. Retourne dans ces réglages. Copie le lien **Wi-Fi** pour un téléphone sur ton réseau local de confiance, ou le lien **Tailscale** pour un téléphone connecté à ton réseau privé Tailscale.
+4. Ouvre le lien complet sur le téléphone pour l’associer. Le secret disparaît de l’adresse après l’association; le navigateur conserve l’autorisation jusqu’à 30 jours. Garde ce lien privé : il donne accès à ta bibliothèque.
+5. **Révoquer les appareils**, depuis le PC, remplace le lien et déconnecte les appareils associés. Désactiver l’accès privé refuse les requêtes réseau; un redémarrage remet aussi l’écoute sur localhost.
+
+Pour utiliser ChessGym à distance, connecte le PC et le téléphone au même réseau privé Tailscale, puis utilise le lien Tailscale proposé par ChessGym. Les règles de ton réseau Tailscale doivent permettre cette connexion; voir le [guide officiel](https://tailscale.com/docs/how-to/connect-to-devices). Il n’est pas nécessaire de rediriger un port du routeur ni d’utiliser Tailscale Serve ou Funnel.
+
+Le lien Wi-Fi direct utilise HTTP : réserve-le à un réseau local de confiance. Tailscale chiffre le transport entre les appareils. Si la page ne s’ouvre pas, vérifie le redémarrage, la connexion des deux appareils au bon réseau et l’autorisation du port ChessGym par le pare-feu sur ce réseau privé. Ne désactive pas le pare-feu globalement et n’ouvre pas le port à Internet.
+
+Si le PC change de réseau ou reçoit une nouvelle adresse, redémarre ChessGym pour actualiser les adresses autorisées, puis copie le nouveau lien. L’interface s’adapte à la largeur du téléphone. Les essais en format mobile dans le navigateur ne remplacent pas une validation de tous les navigateurs iOS et Android. La gestion de l’accès privé reste réservée au PC hôte.
+
 
 ## Démarrer
 
@@ -519,6 +536,6 @@ Cette version couvre la bibliothèque, la synchronisation des parties, l’analy
 
 Un environnement Python ne se déplace pas tel quel : recrée-le sur une autre machine. L’archive source ne contient ni environnement Python, ni moteur, ni données personnelles.
 
-Les étapes Windows sont dans [README.md](README.md#install-on-windows); les instructions Linux non encore validées de bout en bout sont dans le [guide détaillé](USAGE.md#install-on-linux). Pour une nouvelle installation : Python 3.12, environnement virtuel, puis installation de `requirements.txt` (ou `requirements-dev.txt` pour les tests). Lance `run.py`. Les variables CHESSGYM_DATA_DIR, CHESSGYM_HOST, CHESSGYM_PORT et CHESSGYM_ENGINE permettent de choisir les données, l’adresse locale, le port et le moteur UCI. CHESSGYM_HOST accepte seulement localhost ou une adresse de boucle locale, par exemple 127.0.0.1 ou ::1. Sous Linux, installe un Stockfish adapté et indique son chemin ; un exécutable Windows ne convient pas. Le script facultatif `scripts/prepare_local.py` ne réécrit aucun fichier de dépendances et ne télécharge un moteur Windows que sur Windows x86-64.
+Les étapes Windows sont dans [README.md](README.md#install-on-windows); les instructions Linux non encore validées de bout en bout sont dans le [guide détaillé](USAGE.md#install-on-linux). Pour une nouvelle installation : Python 3.12, environnement virtuel, puis installation de `requirements.txt` (ou `requirements-dev.txt` pour les tests). Lance `run.py`. Les variables CHESSGYM_DATA_DIR, CHESSGYM_HOST, CHESSGYM_PORT et CHESSGYM_ENGINE permettent de choisir les données, l’adresse locale, le port et le moteur UCI. Sans CHESSGYM_HOST explicite, le lanceur écoute localement par défaut et active l’écoute réseau après activation du mode privé et redémarrage. Une adresse localhost explicite conserve un accès local. Une écoute réseau exige le mode privé activé. Sous Linux, installe un Stockfish adapté et indique son chemin ; un exécutable Windows ne convient pas. Le script facultatif `scripts/prepare_local.py` ne réécrit aucun fichier de dépendances et ne télécharge un moteur Windows que sur Windows x86-64.
 
-L’application s’ouvre sans connexion et accepte uniquement les accès depuis cet ordinateur. Les adresses d’écoute réseau sont refusées; cette version ne propose pas d’accès distant. Le lanceur Windows utilise le port 8765 ; les journaux sont dans data/server.out.log et data/server.err.log.
+L’application s’ouvre sans connexion sur cet ordinateur. Le mode privé facultatif demande une association pour les autres appareils; les adresses publiques et les en-têtes de proxy ne donnent pas accès. Le lanceur Windows utilise le port 8765 ; les journaux sont dans data/server.out.log et data/server.err.log.

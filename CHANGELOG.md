@@ -27,7 +27,7 @@ Changes after the first community alpha will be recorded here.
 ### First use and local operation
 
 - Direct access without an account, password or login screen. Existing local study data and browser workspace identities are preserved.
-- Loopback-only access with local-host and browser-origin checks; network bind addresses are refused.
+- Localhost access by default, plus optional private LAN/Tailscale access with device pairing, expiring cookies, revocation and strict address/origin checks. Private-access settings are managed only on the host computer.
 - First-run assistant with three editable examples: repertoire, Guess the Move and reading. Original teaching comments are included in French and English under CC0.
 - Stockfish is the only preselected download. Maia, Lichess datasets and separately licensed Lumbra imports remain optional.
 - Re-adding examples creates only missing bases and preserves existing notes and progress.

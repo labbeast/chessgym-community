@@ -1,6 +1,6 @@
 # ChessGym — detailed guide
 
-This guide covers the available tools and advanced settings. For the shortest installation path, start with the [README](README.md#install-on-windows). ChessGym runs locally on one computer, without an account or login.
+This guide covers the available tools and advanced settings. For the shortest installation path, start with the [README](README.md#install-on-windows). ChessGym runs on your computer without an account or login. Optional private access lets you pair your phone with the same installation.
 
 ## Training
 
@@ -97,7 +97,7 @@ Start ChessGym and use the welcome screen to add the examples and install Stockf
 .\.venv\Scripts\python.exe run.py
 ```
 
-Alternatively, use `Demarrer ChessGym.cmd` or `Start-ChessGym.ps1` to start the server in the background and open the browser. `Arreter ChessGym.cmd` stops the instance managed by that launcher. The launcher binds to localhost and reuses an existing running instance.
+Alternatively, use `Demarrer ChessGym.cmd` or `Start-ChessGym.ps1` to start the server in the background and open the browser. `Arreter ChessGym.cmd` stops the instance managed by that launcher. The launcher uses localhost by default, follows the enabled private-access setting after a restart, and reuses an existing running instance.
 
 The optional `scripts/prepare_local.py` helper installs the pinned Python packages, obtains missing Cburnett pieces, and downloads a checksum-verified Stockfish 18 **only on Windows x86-64**. It does not rewrite dependency files. Use `--dev` for test dependencies or `--skip-engine` to keep your own engine. Running this helper makes network requests; it is not required when the dependencies, assets, and engine are already installed.
 
@@ -174,13 +174,29 @@ For Maia 3 on Linux, run `.venv/bin/python scripts/install_maia.py` to prepare i
 
 Open **http://127.0.0.1:8765**, and import a PGN into a new library base. Optional example bases are available in the interface. Stop a foreground server with Ctrl+C.
 
+## Phone access on a private network
+
+The host computer keeps the library and runs Stockfish or Maia. Your phone uses the browser interface and the same study progress. There is one personal workspace, not separate user accounts.
+
+1. On the host computer, open **Settings → Private access** and enable access from a phone.
+2. Stop and restart ChessGym when the setting asks you to. Reopening a browser tab alone does not restart the application.
+3. Open the same settings again. Copy the **Wi-Fi** pairing link for a phone on your trusted home network, or the **Tailscale** pairing link for a phone connected to your private Tailscale network.
+4. Open the complete pairing link on your phone. The secret is removed from the address after pairing, and the browser remembers the device for up to 30 days. Treat the link as private: it grants access to your library.
+5. Use **Revoke devices** on the host to replace the link and invalidate existing pairings, or disable private access to refuse network requests. Stop and restart the application to return the listener to localhost.
+
+For access away from home, install and connect Tailscale on both devices, then use ChessGym’s generated Tailscale IP link. Tailscale’s access rules must allow the connection; see the [official device connection guide](https://tailscale.com/docs/how-to/connect-to-devices). No router port forwarding, Tailscale Serve or Funnel is needed. The host computer must stay awake with ChessGym running.
+
+A direct Wi-Fi link uses HTTP and should be used only on a trusted local network. Tailscale encrypts traffic between its devices. If a link does not open, check that the private mode is active after restart, both devices are on the expected network, and the computer’s firewall allows ChessGym’s port on that private network. Do not disable the firewall globally or open the port to the public Internet.
+
+If the host changes network or gains a new network address, restart ChessGym to refresh the permitted addresses, then copy the new pairing link. The interface is responsive; phone-sized browser checks are distinct from testing every iOS or Android browser. Pairing settings are managed from the host computer, not from a paired phone.
+
 ## Configuration
 
 Set environment variables **before** starting `run.py`. Relative data paths are resolved from the project folder; an absolute path is recommended for a server installation.
 
 | Variable | Default | Purpose |
 | --- | --- | --- |
-| `CHESSGYM_HOST` | `127.0.0.1` | Local bind address only: localhost, 127.0.0.1 or ::1. Network interfaces are refused. |
+| `CHESSGYM_HOST` | Automatic | Localhost by default; private access selects the network listener after restart. An explicit localhost address keeps the process local. Network binding requires private access to be enabled. |
 | `CHESSGYM_PORT` | `8765` | HTTP port. |
 | `CHESSGYM_DATA_DIR` | `data/` in the project | Personal database, settings, progress, and reference stores. |
 | `CHESSGYM_ENGINE` | Automatic discovery | Initial discovery path for a native UCI executable, before a local engine catalogue exists. |
@@ -199,7 +215,7 @@ The Windows launcher's defaults are **up to four import processes** (bounded by 
 
 `-ImportWorkers 0` selects its automatic budget. An already running server retains its configuration until restarted. More processes or cache do not guarantee faster imports; storage throughput and index size matter. Import progress distinguishes reading, saved batches, and final consolidation. Reading 100% of the source does not mean the import is finished.
 
-The password-free application accepts only loopback connections with a local Host header. Cross-origin website requests are rejected. The supplied launcher also refuses a network bind address and ignores forwarded proxy headers. This release does not provide LAN, remote or multi-user access.
+Local access without pairing requires both a loopback connection and a local Host header. The optional private mode accepts only private network clients addressed to detected private host IPs, with a valid pairing cookie. Browser-origin checks remain enforced and forwarded proxy headers do not grant access. Public hosting, port forwarding and Tailscale Funnel are not supported.
 
 ## Study and recovery
 

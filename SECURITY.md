@@ -1,6 +1,10 @@
 # Security
 
-ChessGym is currently a local, single-user alpha. It is intended to listen only on loopback and to be used from the same computer. Remote hosting, LAN access and multiple users are not supported by this release. Removing those restrictions changes its security assumptions.
+ChessGym is a single-user alpha. By default it listens only on loopback, and access on the host computer requires no account or login. Optional private access permits paired devices on a trusted LAN or private Tailscale network. It is disabled until the owner enables it locally and restarts the application.
+
+Private access requires a strong pairing secret and a signed, expiring HttpOnly cookie. Private client addresses, exact detected host IPs and browser origins are checked; forwarding headers do not grant access. Enabling, disabling and rotating access are restricted to local requests. Revoke devices to invalidate existing cookies and pairing links. Pairing links and the access configuration contain credentials and must not be posted in issues or screenshots.
+
+Direct LAN HTTP is not encrypted; use it only on a trusted network. Tailscale encrypts its device-to-device transport. Public Internet hosting, router port forwarding and Tailscale Funnel are outside the supported access model. Do not remove the address, origin or pairing checks to make a public reverse proxy work.
 
 ## Report a vulnerability privately
 

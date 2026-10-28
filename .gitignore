@@ -47,3 +47,7 @@ backups/
 htmlcov/
 .DS_Store
 Thumbs.db
+
+# Private-device association secrets, including custom data locations.
+private-access.json
+.private-access-*.tmp

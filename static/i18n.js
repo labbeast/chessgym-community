@@ -1,3 +1,4 @@
+import {PRIVATE_ACCESS_MESSAGES} from './private-access-messages.js';
 import appUpdateMessages from './locales/en-app-updates.js';
 import setupResourceMessages from './locales/en-setup-resources.js';
 import transpositionMessages from './locales/en-transpositions.js';
@@ -40,9 +41,9 @@ import hindi from './locales/hi.js';
 import {LANGUAGES,LOCALES,validLanguage,languageDirection} from './languages.js';
 
 export {LANGUAGES};
-const english={...trainingTimeStatisticsMessages,...appUpdateMessages,...setupResourceMessages,...gameReportProgressMessages,...trainingCompletionMessages,...transpositionMessages,...completionMessages,...listMessages,...boardMenuMessages,...puzzleMessages,...skillsMessages,...guessMessages,...trainingNavigationMessages,...serverMessages,...libraryMessages,...analysisMessages,...interfaceMessages,...settingsMessages,...gameReportMessages,...computerMessages,...colorMessages,...trainingHistoryMessages,...trainingStatisticsMessages,...dailyReviewMessages,...gameSearchMessages,...trainingPlanMessages,...trainingSessionMessages,...exerciseMessages};
+const english={...PRIVATE_ACCESS_MESSAGES.en,...trainingTimeStatisticsMessages,...appUpdateMessages,...setupResourceMessages,...gameReportProgressMessages,...trainingCompletionMessages,...transpositionMessages,...completionMessages,...listMessages,...boardMenuMessages,...puzzleMessages,...skillsMessages,...guessMessages,...trainingNavigationMessages,...serverMessages,...libraryMessages,...analysisMessages,...interfaceMessages,...settingsMessages,...gameReportMessages,...computerMessages,...colorMessages,...trainingHistoryMessages,...trainingStatisticsMessages,...dailyReviewMessages,...gameSearchMessages,...trainingPlanMessages,...trainingSessionMessages,...exerciseMessages};
 export const sourceMessages=Object.freeze(english);
-export const TRANSLATIONS=Object.freeze({en:english,es:spanish,de:german,pt:portuguese,it:italian,ru:russian,'zh-CN':chinese,ja:japanese,ko:korean,ar:arabic,hi:hindi});
+export const TRANSLATIONS=Object.freeze({en:english,es:{...spanish,...PRIVATE_ACCESS_MESSAGES.es},de:{...german,...PRIVATE_ACCESS_MESSAGES.de},pt:{...portuguese,...PRIVATE_ACCESS_MESSAGES.pt},it:{...italian,...PRIVATE_ACCESS_MESSAGES.it},ru:{...russian,...PRIVATE_ACCESS_MESSAGES.ru},'zh-CN':{...chinese,...PRIVATE_ACCESS_MESSAGES['zh-CN']},ja:{...japanese,...PRIVATE_ACCESS_MESSAGES.ja},ko:{...korean,...PRIVATE_ACCESS_MESSAGES.ko},ar:{...arabic,...PRIVATE_ACCESS_MESSAGES.ar},hi:{...hindi,...PRIVATE_ACCESS_MESSAGES.hi}});
 let language='fr';
 try{const saved=globalThis.localStorage?.getItem('chessgym.language');if(validLanguage(saved))language=saved;}catch{}
 export function getLanguage(){return language;}

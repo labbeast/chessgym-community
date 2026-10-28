@@ -5,11 +5,11 @@ Preparation snapshot: **28 October 2026**. This checklist records completed work
 ## Ready for this alpha
 
 - [x] Source prepared as a clean community snapshot, without personal data, environments, backups, downloaded engines or reference collections.
-- [x] Local single-user access without account creation, password or login. Loopback and browser-origin restrictions are retained.
+- [x] Local single-user access without account creation, password or login. Optional private LAN/Tailscale access uses device pairing, expiring cookies and local-only administration; address and browser-origin checks remain enforced.
 - [x] First-run assistant with three original CC0 examples; Stockfish is the recommended initial download, while Maia and large datasets remain optional.
 - [x] Classic Guess the Move included; experimental Mix excluded from the active application.
 - [x] CPU and Stockfish cache settings bounded by detected hardware, with reasonable presets and cancellable long analysis.
-- [x] Catalogue coverage in twelve languages: **3,774 source messages**, with matching keys and preserved variables.
+- [x] Catalogue coverage in twelve languages: **3,813 source messages**, with matching keys and preserved variables.
 - [x] The source build used for release preparation passed **4,074 isolated Windows tests**, **22 browser scenario groups** and **193 checks from an extracted source archive**.
 - [x] A fresh application folder and Python environment on Windows completed actual Stockfish installation, the three examples, first repertoire practice, reading, Guess the Move, analysis and restart persistence.
 - [x] The maintainer tried the separate first-run installation and reported that it worked on 28 October 2026.
@@ -34,7 +34,7 @@ These are areas for further testing and contribution, rather than claims of comp
 - Linux has only a bounded automated startup/API check. Linux browser and engine workflows, and macOS, need end-to-end validation.
 - Maia, the full puzzle bank, very large reference imports and their interruption/recovery paths need more testing across machines. A general user confirmation does not establish which optional downloads were tested.
 - Large resource downloads need internet access, disk space and time. External services can be unavailable or rate-limit requests.
-- The application is local to one computer. It is not a LAN, remote-hosting or multi-user service.
+- The host computer stores the data and runs the engines. Paired phones may connect over a trusted LAN or private Tailscale network. Public hosting and separate user accounts are outside this release's scope.
 - Alpha features and formats can change. Existing users should keep a verified personal backup before updating.
 
 The source-code licence is AGPL-3.0-or-later. Engines, models, datasets and artwork retain their own terms; see [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), [PIECE-SETS-NOTICES.md](PIECE-SETS-NOTICES.md) and [example provenance](examples/README.md).

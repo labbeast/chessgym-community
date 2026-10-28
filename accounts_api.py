@@ -4,7 +4,7 @@ import json
 from fastapi import APIRouter, Request
 
 import db
-from local_access import require_local_request
+from remote_access import require_authenticated_request, is_local_request
 from version import VERSION
 
 router = APIRouter()
@@ -12,7 +12,7 @@ router = APIRouter()
 
 def require_user(request: Request):
     """Retain the internal owner contract without asking the person to log in."""
-    require_local_request(request)
+    require_authenticated_request(request)
     return db.ensure_local_owner()
 
 
@@ -26,9 +26,11 @@ def status(request: Request):
         workspace_epoch = json.loads(saved_epoch[0]) if saved_epoch else 'initial'
     return {
         'setup_required': False, 'authenticated': True, 'local_mode': True,
+        'access_mode': 'local' if is_local_request(request) else 'private',
         'username': user['username'], 'engine': engine.status(), 'version': VERSION,
         'workspace_epoch': workspace_epoch, 'resources_setup_required': resource_setup.setup_required(),
         'capabilities': {
+            'private_access_management': is_local_request(request),
             'workspace_persistence': True, 'entry_revisions': True, 'personal_backup': True,
             'backup_automation': True, 'review_receipts': True, 'review_preferences': True,
             'entry_pagination': True, 'review_sessions': True, 'daily_review_sessions': True,

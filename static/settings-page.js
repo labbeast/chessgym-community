@@ -12,6 +12,7 @@ import {textSizeSettingsHtml} from './text-size.js';
 import {engineManagerSettingsHtml} from './engine-manager.js';
 import {setupResourcesSettingsHtml} from './setup-resources.js';
 import {appUpdatesSettingsHtml} from './app-updates.js';
+import {privateAccessSettingsHtml} from './private-access.js';
 
 const button=(text,action,cls='')=>'<button class="'+cls+'" data-action="'+action+'">'+text+'</button>';
 
@@ -31,6 +32,7 @@ export function globalSettingsHtml({preferences={},status={},bases=[],theme='cop
  const appearance=appearanceSettingsHtml({...preferences,theme:preferences.theme||theme});
  const sections=[
   {id:'general',label:'Général',content:languageSettingsHtml()+startupSettingsHtml()+sourceSettingsHtml(status)},
+  ...(status.capabilities?.private_access_management?[{id:'private-access',label:'Accès privé',content:privateAccessSettingsHtml()}]:[]),
   {id:'appearance',label:'Apparence',content:textSizeSettingsHtml(preferences)+appearance},
   {id:'sounds',label:'Sons',content:soundSettingsHtml(preferences)},
   {id:'reviews',label:'Révisions',content:reviewPreferencesHtml(preferences,!!status.capabilities?.review_preferences,!!status.capabilities?.review_maintenance)+(status.capabilities?.review_sessions?learningSettingsHtml(preferences,bases):'')},

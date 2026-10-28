@@ -12,7 +12,6 @@ if (-not $running) {
     $dataDir = Join-Path $projectDir 'data'
     New-Item -ItemType Directory -Force -Path $dataDir | Out-Null
     $env:CHESSGYM_PORT = "$Port"
-    $env:CHESSGYM_HOST = '127.0.0.1'
     $env:CHESSGYM_IMPORT_WORKERS = "$ImportWorkers"
     $env:CHESSGYM_IMPORT_CACHE_MB = "$ImportCacheMB"
     $serverArguments = '"' + (Join-Path $projectDir 'run.py') + '"'

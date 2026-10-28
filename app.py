@@ -21,6 +21,7 @@ from library_service import (DEFAULT_SETTINGS, text_field, checked_settings, che
                              get_base, verify_folder, make_primary_exclusive)
 from accounts_api import require_user, status
 from local_access import require_local_request
+import remote_access
 from entry_content import content_snapshot, entry_revision
 from entry_service import (get_entry, check_entry_revision, require_explicit_entry_save,
                            history_state, safe_view_path, save_content, entry_payload, played_game_order, title_for)
@@ -41,6 +42,7 @@ ROOT = Path(__file__).parent
 @asynccontextmanager
 async def lifespan(app):
     async with AsyncExitStack() as cleanup:
+        remote_access.start()
         backup_service.start_guard()
         cleanup.callback(backup_service.close_guard)
         db.init_db()
@@ -107,8 +109,17 @@ app = FastAPI(title='ChessGym', version=VERSION, lifespan=lifespan, docs_url=Non
 
 @app.middleware('http')
 async def protect_requests(request: Request, call_next):
+    pairing_page = False
     try:
-        require_local_request(request)
+        if not remote_access.is_local_request(request):
+            remote_access.require_private_request(request)
+            if not remote_access.valid_device(request):
+                pairing_page = request.method in ('GET', 'HEAD') and request.url.path == '/'
+                public_asset = request.method in ('GET', 'HEAD') and request.url.path in remote_access.PUBLIC_ASSETS
+                pairing_post = request.method == 'POST' and request.url.path == '/api/private-access/pair'
+                if not (pairing_page or public_asset or pairing_post):
+                    return JSONResponse({'detail': remote_access.PAIRING_REQUIRED, 'pairing_required': True},
+                                        403, headers={'Cache-Control': 'no-store'})
     except HTTPException as exc:
         return JSONResponse({'detail': exc.detail}, exc.status_code, headers={'Cache-Control': 'no-store'})
     if (request.url.path.startswith('/api/') and request.method in ('POST', 'PUT', 'PATCH', 'DELETE')
@@ -126,7 +137,10 @@ async def protect_requests(request: Request, call_next):
                 return JSONResponse({'detail': 'Envoi limité à 24 Mo.'}, 413)
         except ValueError:
             return JSONResponse({'detail': 'Taille de requête invalide.'}, 400)
-    response = await call_next(request)
+    if pairing_page:
+        response = FileResponse(ROOT / 'static' / 'private-pair.html', media_type='text/html', headers={'Cache-Control': 'no-store'})
+    else:
+        response = await call_next(request)
     response.headers['X-Content-Type-Options'] = 'nosniff'
     response.headers['Referrer-Policy'] = 'same-origin'
     response.headers['X-Frame-Options'] = 'DENY'
@@ -161,6 +175,7 @@ import resource_setup
 import resource_setup_api
 import app_updates
 import app_updates_api
+import remote_access_api
 
 
 def host_maintenance():
@@ -175,6 +190,7 @@ def host_maintenance():
 
 backup = backup_api.download_backup
 app.include_router(accounts_api.router)
+app.include_router(remote_access_api.router)
 app.include_router(resource_setup_api.router)
 app.include_router(app_updates_api.router)
 app.include_router(entries_api.router)

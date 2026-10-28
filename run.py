@@ -8,8 +8,10 @@ os.chdir(ROOT)
 
 
 def local_host():
-    """A password-free desktop instance must never listen on the network."""
-    host = os.getenv('CHESSGYM_HOST', '127.0.0.1').strip()
+    """Use private-network listening only after explicit local activation."""
+    import remote_access
+    private = remote_access.enabled()
+    host = os.getenv('CHESSGYM_HOST', '0.0.0.0' if private else '127.0.0.1').strip()
     if host.lower() == 'localhost':
         return host
     try:
@@ -17,11 +19,15 @@ def local_host():
             return host
     except ValueError:
         pass
-    raise SystemExit('ChessGym est accessible uniquement depuis cet ordinateur. Utilise 127.0.0.1 ou ::1 pour CHESSGYM_HOST.')
+    if private and (host in ('0.0.0.0', '::') or remote_access.is_private_address(host)):
+        return host
+    raise SystemExit('ChessGym est accessible uniquement depuis cet ordinateur. Active l’accès privé dans les réglages pour utiliser une adresse réseau privée.')
 
 
 def serve():
     host = local_host()
+    import remote_access
+    remote_access.configure_listener(host)
     import uvicorn
     import app_updates
     from app_update_worker import RESTART_EXIT

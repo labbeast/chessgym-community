@@ -22,6 +22,7 @@ The first-run assistant offers three small examples: an opening repertoire, a Gu
 - Daily and weekly training goals, a personal programme, activity history and statistics.
 - Hardware-aware CPU and Stockfish memory settings, with recommended profiles and long or continuous analysis.
 - Twelve interface languages, local themes and piece sets, recoverable drafts, and personal backups.
+- Optional private phone access over a trusted LAN or Tailscale, with device pairing and revocation managed on the host.
 
 The experimental Guess the Move Mix is not included. The classic mode remains available.
 
@@ -31,8 +32,10 @@ The application build used for this release preparation passed **4,074 isolated 
 
 Check the [GitHub Actions results](https://github.com/labbeast/chessgym-community/actions) for the published commit. Local test results do not substitute for those checks or guarantee every machine and workflow.
 
+Private access was also checked through the Windows host's real LAN and Tailscale interfaces (49 checks), then in a touch-enabled, phone-sized browser (14 checks). These cover pairing, normal chess requests, forbidden access, revocation and restart persistence. They are not a claim of testing every physical phone or mobile browser.
+
 - **Windows with Python 3.12 is the tested platform.** Linux has a limited startup/API test; Linux browser and engine workflows, and macOS, still need end-to-end validation.
-- **This release is local and single-user.** It accepts connections only from the same computer. It does not provide LAN, remote-server or multi-user access.
+- **This release is single-user and private.** It opens without login on the host. Optional phone access requires pairing on a trusted LAN or private Tailscale network. Public hosting and separate user accounts are not supported.
 - **Optional resources have their own requirements.** Large databases need disk space and time to import. Maia and full dataset installation need wider testing across machines.
 - **Online integrations depend on their sources.** Downloads and public-game synchronization can be delayed or rate-limited; incomplete operations are reported.
 - **Keep a backup.** Features and data formats may evolve during the alpha series. Use a verified personal backup before updating an existing installation.

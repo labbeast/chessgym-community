@@ -1,3 +1,6 @@
+import {watchPrivatePairingLinks} from './private-access-messages.js';
+// A paired device may reopen its original link; remove the credential immediately.
+watchPrivatePairingLinks(globalThis.location,globalThis.history);
 import {setListOwner,CollectionList} from './list-view.js';
 import {mountCollectionView} from './collection-views.js';
 import {exerciseCatalogHtml} from './exercise-catalog.js';
@@ -19,6 +22,7 @@ import {bindResourceSettings} from './resource-settings.js';
 import {bindEngineManager} from './engine-manager.js';
 import {bindSetupResources} from './setup-resources.js';
 import {bindAppUpdates} from './app-updates.js';
+import {bindPrivateAccess} from './private-access.js';
 import {clearAnalysisCache,applyAnalysisEngine} from './engine-analysis.js';
 import {globalSettingsHtml,backupSettingsHtml as settingsBackupHtml,languageSettingsHtml} from './settings-page.js';
 import {bindSettingsTabs} from './settings-tabs.js';
@@ -90,7 +94,7 @@ preferencesService.subscribe(prefs=>{configureSound(prefs);applyTextSize(prefs);
 let status;
 let positionPanel=null,explorer=null,moveMenu=null,playedGames=null,gameAnalysis=null,repertoirePanel=null,analysisCharts=null,analysisReport=null,analysisResize=null,readingControls=null,editorBusy=false,documentRequest=0;
 let analysisWorkspace=null,reviewNavigationReady=false,reportSession=null;
-let referenceLibrary=null,readingTracker=null,analysisTimeTracker=null,analysisOnly=false,engineManager=null,setupResources=null,appUpdates=null,setupTabRequested=false,engineSettingsRequest=0;
+let referenceLibrary=null,readingTracker=null,analysisTimeTracker=null,analysisOnly=false,engineManager=null,setupResources=null,appUpdates=null,privateAccess=null,setupTabRequested=false,engineSettingsRequest=0;
 let pausedReview=null,resumingReview=false,entryTable=null,reviewStatistics=null,libraryMenu=null,libraryDrag=null,baseAppearanceEditor=null,mobileAnalysis=null;
 let trainingSessionBar=null,reviewLaunching=false;
 let toolbarRunCache=null,toolbarRunRequest=null,toolbarRunRefresh=0,toolbarRunSource=null;
@@ -411,6 +415,7 @@ function disposePageViews(){
  engineManager?.dispose();engineManager=null;
  setupResources?.dispose();setupResources=null;
  appUpdates?.dispose();appUpdates=null;
+ privateAccess?.dispose();privateAccess=null;
  reportSession?.dispose({restore:false});reportSession=null;
  captureAnnotation();
  if(trainingViewPage==='computer'&&trainingView?.snapshot){trainingView.pauseGame?.({render:false,explicit:false});persistComputer(trainingView.snapshot());}
@@ -1479,6 +1484,7 @@ function bindPreferences(){
  if(status.capabilities?.review_sessions)bindLearningSettings(host,{preferencesService,isCurrent,onSaved:(prefs,result)=>{onSaved(prefs);if(result)loadLibrary({force:true}).catch(fail);}});
  if(status.capabilities?.backup_automation)bindBackupSettings(host,{isCurrent});
  if(status.capabilities?.resource_settings)bindResourceSettings(host,{isCurrent});
+ if(status.capabilities?.private_access_management)privateAccess=bindPrivateAccess(host,{isCurrent});
  if(status.capabilities?.app_updates)appUpdates=bindAppUpdates(host,{isCurrent,beforeRestart:async()=>{captureAnnotation();persistAnalysis();persistReview();persistComputer();await workspace.flush();await computerHistory.flush();}});
  if(status.capabilities?.setup_resources)setupResources=bindSetupResources(host,{isCurrent,onChanged:async()=>{
   const next=await api('/api/engine/status');if(!sameAccount())return;clearAnalysisCache();applyAnalysisEngine(next);status.engine=next;await engineManager?.refresh?.();await loadLibrary();
