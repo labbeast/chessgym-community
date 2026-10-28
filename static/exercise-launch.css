@@ -1,0 +1,93 @@
+/* Deliberately scoped to exercise screens; the analysis workspace is unchanged. */
+.training-page .exercise-launch{width:min(100%,620px);margin:24px auto;padding:28px;display:grid;gap:20px;background:var(--surface);border:1px solid var(--line);border-radius:10px;min-width:0}
+.training-page .training-skill-view{max-width:none;padding:0}
+.training-page .exercise-launch h2{margin:0;font-size:1.125rem}
+.training-page .exercise-launch p{margin:0;line-height:1.6}
+.training-page .exercise-config-summary{color:var(--muted);font-size:0.8125rem;line-height:1.6;overflow-wrap:anywhere}
+.training-page .exercise-customize{justify-self:start;background:transparent;border:0;color:var(--accent);padding:0;min-height:32px;font-size:0.75rem}
+.training-page .exercise-launch .exercise-customize{margin-right:14px}
+.training-page .exercise-launch .primary{min-height:44px}
+.training-page .exercise-launch label{display:grid;gap:7px;font-size:0.8125rem;min-width:0}
+.training-page .exercise-launch .exercise-quick-options{display:grid;grid-template-columns:1fr 1fr;gap:16px;min-width:0}
+.training-page [data-training-panel]{max-width:1100px;margin:20px auto;width:100%;min-width:0;background:transparent;border:0}
+.training-page [data-training-panel].training-settings-dialog{max-width:680px}
+.training-page [data-training-panel]>.dialog-form{padding:24px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.training-page [data-training-panel] .dialog-head [aria-label],.training-page [data-training-panel] .dialog-actions [data-history-dialog-close],.training-page [data-training-panel] .dialog-actions [data-statistics-close]{display:none}
+.training-page [data-training-panel] .dialog-head h2{font-size:1.125rem}
+.training-page [data-training-panel] .training-settings-fields{display:grid;gap:18px}
+.training-page [data-training-panel] .training-settings-fields label{display:grid;gap:6px}
+.training-page [data-training-panel] .training-settings-fields .skill-check{display:flex;align-items:center;gap:10px;justify-content:start;text-align:left}
+.training-page [data-training-panel] .skill-check input{width:auto;flex:none;margin:0}
+.training-page .exercise-catalog{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;max-width:1100px;margin:24px auto}
+.training-page .exercise-card{display:flex;flex-direction:column;align-items:start;text-align:left;gap:12px;min-height:190px;padding:24px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.training-page .exercise-card strong{font-size:1.125rem;font-weight:600}.training-page .exercise-card p{color:var(--muted);font-size:0.8125rem;margin:0;line-height:1.6}.training-page .exercise-card .exercise-card-action{margin-top:auto;color:var(--accent);font-size:0.8125rem}
+.training-page .exercise-card:hover{border-color:var(--accent)}
+.training-page .puzzle-dashboard.exercise-launch{display:grid;grid-template-columns:1fr}.training-page .exercise-launch .puzzle-profile{margin:0}.training-page .exercise-launch .puzzle-profile strong{font-size:2.25rem}
+.training-page .exercise-launch .puzzle-modes>*{flex:1;min-height:42px}.training-page .exercise-launch .puzzle-actions>.primary{flex:1}.training-page .exercise-launch .puzzle-actions{margin-top:20px}
+.training-page .puzzle-settings-layout{max-width:860px;margin:20px auto}.training-page .puzzle-settings-layout>.panel{padding:24px}.training-page .puzzle-settings-layout .puzzle-import{margin-top:0}.training-page .puzzle-settings-layout details{margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
+.training-page .blindfold-profiles{margin:0;gap:14px}.training-page .blindfold-profiles>div{padding:16px;text-align:left}.training-page .blindfold-profiles button{width:100%;margin-top:12px}
+.training-page .computer-setup [data-computer-advanced]{display:none}.training-page .computer-setup .computer-controls{align-self:start}.training-page .computer-setup .computer-engine-note{font-size:0.75rem}
+.training-page .guess-setup-grid{display:block;max-width:850px;margin:24px auto}.training-page .guess-setup-grid>section{padding:24px}.training-page .guess-setup-grid>section+section{display:none}
+.training-page [hidden]{display:none!important}
+.training-page .skill-layout:has(.exercise-launch){grid-template-columns:minmax(0,1fr)}
+.training-page .skill-layout:has(.exercise-launch)>.skill-stage{width:100%;max-width:none}
+.training-page .skill-layout:has(.exercise-launch) .skill-stage:has([data-color-setup]){background:transparent;padding:0;border:0}
+.training-page [data-training-settings-fields]{max-width:none;margin:0;padding:0;border:0;background:transparent}
+.training-page [data-training-panel]{max-height:none;overflow:visible}
+.training-page .training-header h1{font-size:1.5rem;line-height:1.25}
+.training-page .daily-review{max-width:850px;margin:24px auto;padding:24px}
+.training-page .daily-review .daily-advanced-fields{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.training-page .daily-review [data-daily-settings]{margin-top:14px}
+.training-page .daily-review [data-daily-composition]{margin-top:16px;font-size:0.8125rem}
+.training-page .daily-review .daily-total-summary{font-size:1.125rem;color:var(--ink)}
+.training-page .computer-settings-controls{padding:24px}
+.training-page .computer-settings-controls [data-computer-copy-preferences]{margin-top:24px;padding-top:20px;border-top:1px solid var(--line)}
+@media(max-width:800px){.training-page .training-skill-view .training-header{padding-inline:12px}.training-page .training-skill-view .exercise-launch{width:min(calc(100% - 24px),620px)}.training-page .training-skill-view [data-training-panel]{width:calc(100% - 24px)}}
+@media(max-width:760px){.training-page .training-header h1{font-size:1.25rem}.training-page .daily-review{padding:16px}.training-page .daily-review .daily-advanced-fields{grid-template-columns:1fr}.training-page .computer-settings-controls{padding:16px}}
+@media(max-width:760px){.training-page .training-header .review-page-tabs>button{flex:1 1 0;min-width:0;min-height:44px;white-space:normal;padding:6px 3px;font-size:0.6875rem;line-height:1.3;text-align:center}}
+@media(max-width:760px){.training-page .exercise-launch{padding:20px;margin:16px auto;gap:18px}.training-page .exercise-catalog{grid-template-columns:1fr;gap:12px;margin:16px auto}.training-page .exercise-card{padding:20px;min-height:150px}.training-page [data-training-panel]>.dialog-form{padding:16px}.training-page .exercise-launch .exercise-quick-options{gap:12px}.training-page .puzzle-settings-layout>.panel{padding:16px}.training-page .guess-setup-grid>section{padding:16px}}
+@media(min-width:761px) and (max-width:1050px){.training-page .exercise-catalog{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Coordinates keeps the whole board in the available viewport, including during play. */
+.training-page .coordinate-view .skill-layout{grid-template-columns:minmax(0,1fr);justify-items:center}
+.training-page .coordinate-view .skill-layout>.skill-stage{width:100%;max-width:680px}
+.training-page .coordinate-view .skill-layout>.skill-stage:has([data-coordinate-setup]){max-width:980px}
+.training-page .coordinate-view .exercise-launch{width:100%;margin:0;padding:0;border:0;background:transparent;grid-template-columns:minmax(0,1fr) 240px;grid-template-areas:"board options";gap:16px;align-items:start}
+.coordinate-view .coordinate-setup-options{grid-area:options;display:grid;gap:12px;padding:16px;border:1px solid var(--line);border-radius:10px;background:var(--surface);min-width:0}
+.training-page .coordinate-view .exercise-quick-options{grid-template-columns:minmax(0,1fr);gap:12px}
+.coordinate-view .coordinate-setup-summary{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+.training-page .coordinate-view .exercise-customize{margin:0}
+.coordinate-view .skill-coordinate-board{width:min(100%,var(--coordinate-board-size,680px));margin-inline:auto}
+.coordinate-view [data-coordinate-setup]>.skill-coordinate-board{grid-area:board}
+.coordinate-view .skill-livebar{width:min(100%,var(--coordinate-board-size,680px));min-width:min(100%,320px);margin-inline:auto;flex-wrap:wrap}
+.coordinate-view .coordinate-highscore{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px 12px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--panel);font-size:.82rem}
+.coordinate-view .coordinate-highscore>span:first-child{color:var(--muted)}
+.coordinate-view .coordinate-highscore-values{display:flex;flex-wrap:wrap;gap:6px 12px}
+.coordinate-view .coordinate-highscore-values>span{white-space:nowrap}
+.coordinate-view .coordinate-highscore strong{color:var(--accent);font-size:1rem;font-variant-numeric:tabular-nums}
+.coordinate-view .skill-livebar>.coordinate-highscore{padding:0;border:0;background:transparent}
+.coordinate-view .skill-result>.coordinate-highscore{margin-bottom:16px}
+.coordinate-view .skill-livehint{width:100%;min-height:calc(2lh + 12px);margin-inline:auto}
+.coordinate-view [data-training-session-slot]:empty{display:none}
+.coordinate-view .coordinate-setup-options>[data-training-session-slot]{grid-row:1}
+.coordinate-view .coordinate-live-program{width:100%;min-width:0}
+.training-page .coordinate-view .skill-layout:has(>.coordinate-live-program:not(:empty)){grid-template-columns:minmax(0,680px) 240px;gap:16px;max-width:980px;margin-inline:auto}
+@media(max-width:700px){
+ .training-page .coordinate-view .exercise-launch{grid-template-columns:minmax(0,1fr);grid-template-areas:"options" "board";gap:10px}
+ .coordinate-view .coordinate-setup-options{padding:10px 12px;gap:6px;margin-inline:8px}
+ .training-page .coordinate-view .exercise-quick-options{grid-template-columns:1fr 1fr;gap:12px}
+ .training-page .coordinate-view .exercise-quick-options label{gap:3px}
+ .coordinate-view .coordinate-setup-options select{padding-block:6px}
+ .training-page .coordinate-view .skill-layout:has(>.coordinate-live-program:not(:empty)){grid-template-columns:minmax(0,1fr);gap:10px}
+ .coordinate-view .coordinate-live-program{grid-row:1;padding-inline:8px}
+}
+@media(max-height:500px) and (min-width:701px){
+ .training-page .coordinate-view .training-header{grid-template-columns:auto minmax(0,1fr);gap:12px;margin-bottom:10px}
+ .coordinate-view .training-header-copy>span{display:none}
+ .training-page .coordinate-view .training-header h1{font-size:1.125rem;margin:0}
+ .coordinate-view .coordinate-setup-options{padding:10px;gap:8px}
+ .training-page .coordinate-view .exercise-quick-options{gap:8px}
+ .training-page .coordinate-view .exercise-quick-options label{gap:3px}
+ .coordinate-view .coordinate-setup-options select{padding-block:6px}
+ .coordinate-view .coordinate-highscore{padding:6px 10px}
+}

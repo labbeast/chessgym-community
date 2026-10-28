@@ -1,0 +1,30 @@
+/* Interface direction follows the selected language; board coordinates and
+   chess notation keep their conventional, stable left-to-right ordering. */
+.chess-board,.skill-square-grid,.board-recent-preview-board,.board-toolbar,
+.analysis-move-row,.analysis-variation,.variation,.move-list,.engine-moves,.skill-move-list,
+.computer-moves,.guess-moves,.move,.analysis-moves-result,.skill-attempt-list,
+pre,code,input[name=move],input[name=fen],textarea[name=pgn],
+input[type=url],input[type=email],input[type=number]{direction:ltr;unicode-bidi:isolate}
+.analysis-move-comment,.move-comment,.guess-comment{unicode-bidi:plaintext;text-align:start}
+html[dir=rtl] .analysis-move-comment{direction:rtl}
+html[dir=rtl] .topbar .top-actions{margin-left:0;margin-right:auto}
+
+html[dir=rtl] :is(.text-button,.sidebar>button,.skill-history-link){text-align:start}
+html[dir=rtl] :is(th,td){text-align:start}
+html[dir=rtl] .board-recent-meta time{margin-left:0;margin-right:auto}
+html[dir=rtl] .board-recent-item:has(>.board-draft-options) .board-recent-heading,
+html[dir=rtl] .workspace-draft-heading{padding-right:0;padding-left:30px}
+html[dir=rtl] .board-menu-content .board-draft-options,
+html[dir=rtl] .workspace-draft-main>.workspace-draft-delete{right:auto;left:0}
+html[dir=rtl] .board-recent-section>summary::after{margin-left:3px;margin-right:auto;transform:rotate(135deg)}
+html[dir=rtl] .board-recent-section[open]>summary::after{transform:rotate(45deg)}
+html[dir=rtl] .board-recent-list{margin-left:0;margin-right:16px;padding-left:0;padding-right:7px;border-left:0;border-right:1px solid var(--line)}
+html[dir=rtl] .engine-head label,html[dir=rtl] .compat-line button{margin-left:0;margin-right:auto}
+html[dir=rtl] .skill-records strong{text-align:end}
+html[dir=rtl] #notices{right:auto;left:20px}
+html[dir=rtl] :is(h1,h2,h3){letter-spacing:normal}
+@media(pointer:coarse){
+ html[dir=rtl] .board-recent-item:has(>.board-draft-options) .board-recent-heading,
+ html[dir=rtl] .workspace-draft-heading{padding-left:44px}
+}
+@media(max-width:650px){html[dir=rtl] #notices{left:16px;right:16px}}

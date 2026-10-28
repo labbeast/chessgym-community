@@ -1,0 +1,29 @@
+/* Opt-in spacing: compact mode stays the default, on every device. */
+html[data-touch-comfort=true] .analysis-moves .analysis-move,
+html[data-touch-comfort=true] .analysis-moves .analysis-move-inline{min-height:40px;padding-block:7px}
+html[data-touch-comfort=true] :is(.analysis-reading-options,.notation-actions,.review-actions,.review-grading) button,
+html[data-touch-comfort=true] .analysis-reading-controls>summary,
+html[data-touch-comfort=true] :is(.analysis-tool-tabs,.analysis-mobile-tabs,.review-tabs)>button{min-height:44px}
+html[data-touch-comfort=true] .review-tabs{height:44px}
+html[data-touch-comfort=true] .engine-line [data-pv-step]{min-height:34px}
+html[data-touch-comfort=true] .review-grading .grade-buttons{gap:6px}
+@media(max-width:850px),(max-width:1000px) and (max-height:500px){
+ .analysis-command-dock>.actions>.workspace-status{font-size:0;min-width:28px;max-width:28px;padding-inline:3px}
+ .analysis-command-dock .workspace-status::after{content:'●';font-size:0.9375rem}
+ .analysis-command-dock .workspace-status[data-state=saved]::after{content:'✓'}
+ .analysis-command-dock .workspace-status:is([data-state=conflict],[data-state=error])::after{content:'!'}
+ html[data-touch-comfort=true] .analysis-workbench{grid-template-rows:max-content 44px minmax(var(--analysis-mobile-panel-min),1fr)}
+ html[data-touch-comfort=true] .analysis-workbench .board-toolbar{height:46px;min-height:46px}
+ html[data-touch-comfort=true] .analysis-workbench .board-toolbar button{min-width:44px}
+ html[data-touch-comfort=true] .analysis-workbench .board-toolbar button,
+ html[data-touch-comfort=true] .analysis-command-dock>.actions>button,
+ html[data-touch-comfort=true] .analysis-command-dock .analysis-more>summary{min-height:44px;height:44px}
+ html[data-touch-comfort=true] .analysis-command-dock .analysis-more-actions>button{min-height:44px}
+ html[data-touch-comfort=true] .analysis-command-dock .analysis-reading-options button{min-height:40px}
+}
+@media(max-width:380px){
+ html[data-touch-comfort=true] .analysis-workbench .board-toolbar :is([data-b=first],[data-b=last]){display:none}
+}
+@media(min-width:600px) and (max-width:1000px) and (max-height:500px){
+ html[data-touch-comfort=true] .analysis-workbench{grid-template-rows:44px minmax(0,1fr)}
+}

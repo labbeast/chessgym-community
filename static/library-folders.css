@@ -1,0 +1,49 @@
+/* Compact folder navigation; disclosure and selection are independent controls. */
+.library-layout{grid-template-columns:214px minmax(0,1fr);gap:20px}
+.folder-list.library-folders{display:block;min-width:0;align-self:start;overflow:hidden;padding:6px 0;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.library-folders ul{list-style:none;margin:0;padding:0}
+.library-folders .folder-shortcuts{padding:2px 6px 9px;border-bottom:1px solid var(--line)}
+.library-folders .folder-tree-heading{padding:12px 13px 5px;font-size:0.625rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.library-folders .folder-tree{padding:0 6px 5px}
+.library-folders .folder-node{position:relative;min-width:0}
+.library-folders .folder-row{display:flex;align-items:center;gap:0;min-width:0;padding-left:calc(var(--folder-depth)*13px);position:relative}
+.library-folders .folder-children{position:relative}
+.library-folders .folder-children::before{content:'';position:absolute;left:calc(var(--folder-depth)*13px + 10px);top:0;bottom:16px;border-left:1px solid var(--line);pointer-events:none}
+.library-folders .folder-children>.folder-node>.folder-row::before{content:'';position:absolute;left:calc(var(--folder-depth)*13px - 3px);top:50%;width:6px;border-top:1px solid var(--line);pointer-events:none}
+.folder-list.library-folders button{min-height:33px;border:0;border-radius:5px;background:transparent;white-space:nowrap;overflow-wrap:normal;padding:5px 7px;font-size:0.75rem;color:var(--ink);line-height:1.4}
+.folder-list.library-folders button:hover{background:var(--soft)}
+.folder-list.library-folders button:focus-visible{outline-offset:-2px}
+.folder-list.library-folders .folder-choice{display:flex;align-items:center;gap:6px;flex:1;min-width:0;text-align:left;justify-content:flex-start}
+.folder-list.library-folders .folder-shortcuts .folder-choice{width:100%;min-height:35px}
+.folder-list.library-folders .folder-choice span{padding-left:0;color:inherit}
+.folder-list.library-folders .folder-choice.active{color:var(--accent);background:var(--tint);box-shadow:inset 2px 0 var(--accent)}
+.folder-list.library-folders .folder-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}
+.folder-list.library-folders .folder-count{flex:none;min-width:15px;text-align:right;font-size:0.625rem;font-variant-numeric:tabular-nums;color:var(--muted);opacity:.9}
+.folder-list.library-folders .folder-icon{width:15px;height:17px;flex:none;color:var(--muted)}
+.library-folders .folder-icon svg{display:block;width:16px;height:17px;fill:none;stroke:currentColor;stroke-width:1.25;stroke-linejoin:round}
+.folder-list.library-folders .folder-choice.active .folder-icon{color:var(--accent)}
+.folder-list.library-folders .folder-toggle,.library-folders .folder-toggle-spacer{display:flex;align-items:center;justify-content:center;padding:0;width:21px;min-width:21px;min-height:29px;flex:none;color:var(--muted)}
+.library-folders .folder-toggle svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:transform .12s}
+.library-folders .folder-toggle[aria-expanded=true] svg{transform:rotate(90deg)}
+.folder-list.library-folders .contains-current>.folder-row>.folder-toggle{color:var(--accent)}
+.library-folders .folder-tree-empty{font-size:0.6875rem;line-height:1.65;color:var(--muted);margin:0;padding:4px 14px 10px}
+@media(max-width:1000px){.library-layout{grid-template-columns:190px minmax(0,1fr);gap:14px}}
+@media(max-width:650px){.library-layout{display:block}.folder-list.library-folders{display:block;max-height:38vh;overflow:auto;margin-bottom:16px;padding-bottom:5px}.library-folders .folder-choice,.library-folders .folder-toggle{touch-action:manipulation}.folder-list.library-folders button{min-height:38px}.library-folders .folder-tree{padding-right:9px}}
+@media(prefers-reduced-motion:reduce){.library-folders .folder-toggle svg{transition:none}}
+
+/* Library cards reserve the same space for each field, including empty ones. */
+#library-content .base-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,14.5rem),1fr));grid-auto-rows:1fr;gap:12px;align-items:stretch}
+#library-content .base-card{display:flex;flex-direction:column;gap:4px;min-height:0;padding:12px;border-radius:8px}
+#library-content .base-card>*{flex-shrink:0;min-width:0}
+#library-content .base-card-head{height:2rem;margin:0;gap:8px;font-size:0.625rem;line-height:1.3}
+#library-content .base-card-head>span:last-child{min-width:0;text-align:right}
+#library-content .base-card .base-logo{width:2rem;height:2rem;border-radius:8px}
+#library-content .base-card .base-logo svg{width:1.375rem;height:1.375rem}
+#library-content .base-card h2{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;height:2.7em;margin:0;font-size:0.9375rem;line-height:1.35;overflow-wrap:anywhere}
+#library-content .base-card p{margin:0;font-size:0.6875rem;line-height:1.35;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#library-content .base-card .tags{height:1.25rem;min-height:0;flex-wrap:nowrap;overflow:hidden;align-items:center}
+#library-content .base-card .badge{flex:none;padding:2px 6px}
+#library-content .base-card .base-uses{display:flex;align-items:center;gap:6px;overflow:hidden;height:2.25rem;min-height:0;margin:0;padding-top:6px;font-size:0.625rem;line-height:1.35}
+.library-mode-badge{display:inline-flex;align-items:center;justify-content:center;flex:none;width:1.75rem;height:1.75rem;border-radius:6px;background:var(--tint);color:var(--accent)}
+.library-mode-badge .ui-icon{width:1.125rem;height:1.125rem}
+.library-reference-status{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}

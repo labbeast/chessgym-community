@@ -1,0 +1,63 @@
+"""Exercise the real explorer renderer and asynchronous handlers without live data."""
+import subprocess
+import pytest
+from test_board_interactions import node_binary, ROOT
+
+@pytest.mark.parametrize('scenario', [
+    'search_progress_tracks_loading_preparation_pause_retry_and_completion',
+    'search_progress_clears_on_failure_and_hidden_view',
+    'importing_frequency_rows_do_not_claim_unknown_outcomes',
+    'preparing_refresh_preserves_primary_and_scores_then_evaluates_added_moves',
+    'preparing_primary_has_no_empty_result_and_failure_remains_distinct',
+    'preparing_reference_does_not_claim_empty_and_translates_status',
+    'preparing_poll_stops_on_navigation_settings_collapse_hide_dispose',
+    'preparing_browser_hidden_cancels_and_resumes_without_late_response',
+    'preparing_budget_pauses_and_manual_refresh_keeps_existing_data',
+    'preparing_network_failure_retains_results_without_poll_loop',
+    'independent_local_filters_survive_source_switch_save_and_reopen',
+    'lichess_comparison_uses_own_ratings_speeds_and_reference_label',
+    'local_empty_filters_mean_all_and_unknown_cadence_is_explicit',
+    'invalid_local_bounds_and_empty_lichess_reference_are_rejected',
+    'remote_masters_has_note_instead_of_filter_controls',
+    'partial_reference_is_labelled_and_manual_refresh_reads_new_counts',
+    'partial_dataset_without_message_uses_clear_fallback_and_escapes_details',
+    'coverage_profile_overrides_only_this_explorer',
+    'probability_same_position_branch_change_preserves_table_and_ignores_stale',
+    'probability_side_is_saved_without_restarting_statistics_or_engine',
+    'probability_setting_can_hide_and_preserve_color_depth',
+    'probability_retry_does_not_reload_move_statistics',
+    'hidden_tab_suspends_statistics_and_engine_until_visible',
+    'hiding_tab_ignores_late_statistics_and_preserves_manual_pause',
+    'settings_depth_modes_saved_and_reopened',
+    'settings_invalid_depth_rejected_without_request',
+    'evaluations_depth_change_cancels_old_and_preserves_pause',
+    'evaluations_depth_labels_exact_terminal_and_quick',
+    'evaluations_all_rows_progressively_preserve_interaction',
+    'evaluations_pause_resume_and_review_guard',
+    'evaluations_navigation_settings_collapse_dispose_ignore_late',
+    'evaluations_failure_retry_retains_statistics_and_scores',
+    'evaluations_row_failure_continues_then_retries_only_failed',
+    'rate_limit_wait_is_visible_without_auto_retry',
+    'late_settings_save_preserves_new_modal',
+    'settings_modal_connects_and_clears_on_close',
+    'connection_save_delete_and_private_payload',
+    'connection_validation_environment_and_cleanup',
+    'connection_late_completion_after_close',
+    'auth_required_preserves_local_and_no_retry_loop',
+    'rare_and_truncated_move_statistics',
+    'inline_percentages_and_result_semantics',
+    'compact_settings_and_source_labels',
+    'debounce_and_out_of_order_responses',
+    'disposal_cancels_pending_updates',
+    'partial_failure_and_stale_results',
+    'exact_move_and_stale_click_guards',
+    'unavailable_empty_and_retry',
+    'collapse_cancels_and_reopens',
+])
+def test_explorer_ui(scenario):
+    result = subprocess.run(
+        [node_binary(), str(ROOT / 'tests/explorer_ui.mjs'), scenario],
+        text=True, encoding='utf-8', capture_output=True, timeout=15,
+        creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0),
+    )
+    assert result.returncode == 0, result.stderr + result.stdout

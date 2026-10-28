@@ -1,0 +1,16 @@
+.ui-icon{display:inline-block;width:18px;height:18px;flex:0 0 auto;vertical-align:middle;pointer-events:none}
+.navigation-menu-content button{display:flex;align-items:center;gap:0}
+.navigation-menu-content .navigation-item-icon{margin-right:10px;color:var(--muted)}
+.navigation-menu-content button:hover .navigation-item-icon,.navigation-menu-content button[aria-current=page] .navigation-item-icon{color:var(--accent)}
+.navigation-menu-content .navigation-activity-dot{flex:none}
+.training-page .exercise-card-heading{display:flex;align-items:center;gap:14px;min-width:0;width:100%}
+.training-page .exercise-card-heading strong{min-width:0;line-height:1.35}
+.training-page .exercise-card-icon{display:grid;place-items:center;flex:0 0 48px;width:48px;height:48px;border:1px solid var(--line);border-radius:12px;background:var(--tint);color:var(--accent)}
+.training-page .exercise-card-icon .ui-icon{width:27px;height:27px}
+.training-page .exercise-card:hover .exercise-card-icon{border-color:var(--accent)}
+@media(max-width:850px),(max-width:1000px) and (max-height:500px){.mobile-navigation .navigation-menu-content button{display:flex}}
+@media(max-width:760px){
+ .training-page .exercise-card-icon{flex-basis:42px;width:42px;height:42px;border-radius:10px}
+ .training-page .exercise-card-icon .ui-icon{width:24px;height:24px}
+ .training-page .exercise-card-heading{gap:12px}
+}

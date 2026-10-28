@@ -1,0 +1,94 @@
+/* Shared navigation stays compact; only the analysis workspace fixes its height. */
+:root{--app-header-height:46px}
+.topbar{
+ /* Keep navigation menus above sticky tabs and page controls, below context menus. */
+ z-index:50;
+ height:var(--app-header-height);min-height:var(--app-header-height);
+ padding:4px 14px;gap:14px;justify-content:flex-start;
+}
+.topbar .brand{flex:0 0 auto;border-radius:4px}
+.topbar .brand picture{display:block;position:relative}
+.topbar .brand img{width:124px;height:36px}
+/* Match the 3:1 logo inside object-fit:contain and tint only its Gym lettering. */
+.topbar .brand picture::after{
+ content:"";position:absolute;top:0;left:50%;height:100%;aspect-ratio:3 / 1;
+ transform:translateX(-50%);pointer-events:none;background:var(--accent);
+ -webkit-mask:url("/static/logo.png") center / contain no-repeat;
+ mask:url("/static/logo.png") center / contain no-repeat;
+ clip-path:inset(0 0 0 65%);
+}
+.top-nav{display:flex;align-items:center;gap:3px;flex:1;min-width:0}
+.top-nav>button{
+ display:flex;align-items:center;justify-content:center;gap:6px;
+ flex:0 0 auto;min-height:34px;padding:6px 10px;
+ border:0;border-radius:5px;background:transparent;
+ color:var(--muted);font-size:0.75rem;white-space:nowrap;
+}
+.top-nav>button>span{font-size:1rem;line-height:1;color:var(--muted)}
+.top-nav>button[aria-current=page]{background:var(--tint);color:var(--accent)}
+.top-nav>button[aria-current=page]>span{color:var(--accent)}
+.top-nav>button:hover:not(:disabled){background:var(--soft);color:var(--ink)}
+.top-nav>button:focus-visible{outline-offset:-2px}
+.topbar .top-actions{flex:0 0 auto;gap:5px;margin-left:auto}
+.topbar .top-actions>button{
+ display:flex;align-items:center;justify-content:center;gap:5px;
+ min-height:32px;padding:5px 8px;font-size:0.6875rem;white-space:nowrap;
+}
+.topbar .top-actions .status-dot{display:inline-block;flex:0 0 auto;margin-right:0}
+
+.shell{display:block;min-height:calc(100dvh - var(--app-header-height))}
+.shell>main{padding:20px 22px 36px}
+.mobile-navigation,.mobile-page-label{display:none}
+.topbar .analysis-entry-navigation-mobile{display:none}
+
+@media(min-width:851px) and (max-width:1199px){
+ .topbar{gap:10px;padding-inline:12px}
+ .topbar .brand img{width:112px}
+ .top-nav{gap:2px}
+ .top-nav>button{padding-inline:8px;font-size:0.6875rem}
+ .top-nav>button>span{display:none}
+ .topbar .top-actions>button>span:not(.status-dot){display:none}
+ .topbar .top-actions>button{min-width:32px;font-size:0.9375rem;padding:4px 7px}
+
+}
+@media(min-width:1200px) and (max-width:1349px){
+
+}
+@media(max-width:850px){
+ .topbar{padding:4px 12px;gap:10px}
+ .topbar .brand img{width:120px;height:36px}
+ .top-nav{display:none}
+
+ .shell>main{padding:18px 16px 90px}
+}
+@media(max-width:650px){
+ .topbar .top-actions>button{min-width:32px;font-size:0.9375rem;padding:4px 7px}
+ .topbar .top-actions>button>span:not(.status-dot){display:none}
+ .shell>main{padding:16px 12px 90px}
+}
+/* One navigation bar on handheld screens; no persistent bottom strip. */
+@media(max-width:850px), (max-width:1000px) and (max-height:500px){
+ :root{--app-header-height:calc(44px + env(safe-area-inset-top,0px))}
+ .topbar{padding:env(safe-area-inset-top,0px) max(8px,env(safe-area-inset-right)) 0 max(8px,env(safe-area-inset-left));gap:4px}
+ .topbar .brand{order:0;width:32px;min-width:32px;padding:0}
+ .topbar .brand picture{display:block}
+ .topbar .brand picture::after{display:none}
+ .topbar .brand img{width:32px;height:32px;filter:none}
+ .topbar .mobile-navigation{order:1}
+ .topbar .mobile-page-label{order:2}
+ .topbar .top-actions{order:3}
+ .topbar:has(.mobile-navigation-group[open]) .mobile-page-label{display:none}
+ .mobile-page-label{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:0.75rem;color:var(--muted)}
+ .topbar #analysis-entry-nav-mobile{flex:1 1 auto;min-width:76px;max-width:160px;overflow:visible}
+ .topbar .analysis-entry-navigation-mobile{display:flex;width:100%;min-width:0;gap:2px}
+ .topbar .analysis-entry-navigation-mobile>button{display:flex;align-items:center;justify-content:center;flex:0 0 28px;width:28px;min-width:28px;min-height:36px;padding:0;font-size:1.125rem;line-height:1;background:transparent}
+ .topbar .analysis-entry-counter{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;font-size:0.6875rem}
+ .topbar .top-actions{gap:3px}
+ .topbar .top-actions>button{min-height:36px;min-width:36px;padding:4px 6px;font-size:0.9375rem}
+ .topbar .top-actions>button>span:not(.status-dot){display:none}
+ .mobile-navigation{display:flex;align-items:center;gap:2px;position:static;flex:none}
+ .top-nav{display:none}
+ .bottom-nav{display:none}
+ .shell>main{padding:12px max(10px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))}
+ #notices{bottom:max(10px,env(safe-area-inset-bottom));font-size:0.75rem;pointer-events:none}
+}

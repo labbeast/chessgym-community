@@ -1,0 +1,109 @@
+name: ChessGym checks
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHONUTF8: '1'
+  PYTHONUNBUFFERED: '1'
+
+jobs:
+  windows:
+    name: Windows · complete regression suite
+    runs-on: windows-2022
+    timeout-minutes: 30
+    env:
+      CHESSGYM_DATA_DIR: ${{ github.workspace }}/output/ci-bootstrap-data
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+            requirements.lock.txt
+      - name: Set up Node for JavaScript interaction tests
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Install test dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Check dependency consistency
+        run: python -m pip check
+      - name: Install the checksum-verified native engine
+        run: python scripts/prepare_local.py --skip-dependencies
+      - name: Require the runtimes used by the regression suite
+        shell: pwsh
+        run: |
+          node --input-type=module -e "import {registerHooks} from 'node:module'; if (typeof registerHooks !== 'function') process.exit(1)"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -c "import engine; assert engine.binary_path(), 'The native Stockfish engine is required in CI'"
+      - name: Run all isolated Python and JavaScript regressions
+        run: python scripts/test_learning_changes.py --full
+      # Maia is optional and intentionally not downloaded by CI. Its real-model
+      # tests report their skip; the remaining Maia tests use isolated fixtures.
+      # Logs, generated games and test databases stay on the ephemeral runner.
+
+  linux-smoke:
+    name: Linux · basic portability checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      CHESSGYM_DATA_DIR: ${{ github.workspace }}/output/ci-bootstrap-data
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+            requirements.lock.txt
+      - name: Set up Node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Install test dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Check dependency consistency
+        run: python -m pip check
+      - name: Check HTTP journeys, storage, PGN and browser logic
+        run: >-
+          python scripts/test_learning_changes.py
+          tests/test_app_lifecycle.py
+          tests/test_integration.py
+          tests/test_workspace_state.py
+          tests/test_workspace_api.py
+          tests/test_pgn_payload.py
+          tests/test_pgn_null_moves.py
+          tests/test_frontend_pgn.py
+          tests/test_training_programs.py
+          tests/test_game_report_progress.py
+          tests/test_game_report_progress_ui.py
+          tests/test_sync_remote.py
+      # These checks do not claim full Linux browser, Stockfish or Maia support.

@@ -1,0 +1,80 @@
+.computer-page{min-width:0;max-width:1240px;margin-inline:auto}
+.computer-heading{display:flex;align-items:baseline;gap:14px;margin:0 0 12px;flex-wrap:wrap}
+.computer-heading h1{font-size:1.3rem;margin:0}.computer-heading .muted{color:var(--muted);font-size:.8rem}
+.computer-workspace-status{margin-left:auto;font-size:.7rem;padding:4px 7px;min-height:28px;color:var(--muted);background:transparent;border-color:var(--line)}
+.computer-workspace-status[data-state=conflict],.computer-workspace-status[data-state=error]{color:var(--accent)}
+.computer-workspace{display:grid;grid-template-columns:minmax(280px,680px) minmax(265px,1fr);gap:16px;align-items:start}
+.computer-board-column{min-width:0}.computer-board-column .engine-panel{display:none}
+.computer-board-column .board-toolbar{margin:7px 0 0}.computer-page:not(.computer-game-finished) .board-toolbar>div:first-child{display:none}
+.computer-setup .board-toolbar{display:none}.computer-setup .square:disabled{cursor:default}
+.computer-controls{padding:20px}.computer-controls form{display:flex;flex-direction:column;gap:14px}
+.computer-config-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.computer-config-grid label{display:flex;flex-direction:column;gap:6px;font-size:.8rem;min-width:0}
+.computer-config-grid input,.computer-config-grid select,.computer-config-grid textarea{width:100%;min-width:0}
+.computer-config-grid textarea{resize:vertical;overflow-wrap:anywhere;font-family:ui-monospace,monospace;font-size:.75rem}
+.computer-wide{grid-column:1/-1}.computer-engine-note{line-height:1.55;margin:0}
+.computer-game-panel{padding:0;overflow:hidden;display:flex;flex-direction:column;min-height:340px}
+.computer-status{padding:15px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line)}
+.computer-status>span{display:grid;place-items:center;width:35px;height:35px;font-size:1.8rem;color:var(--accent)}
+.computer-status>div{display:flex;flex-direction:column;gap:4px}.computer-status strong{font-size:1rem}.computer-status small{color:var(--muted)}
+.computer-status>b{margin-left:auto;white-space:nowrap}.computer-status.won{color:#a5d6a7;background:#619b6517}.computer-status.won>span{color:#a5d6a7}
+.computer-status.lost>span{color:#e6a58e}.computer-status.draw>span{color:var(--muted)}
+.computer-status.thinking>span{animation:computer-thinking 1.2s ease-in-out infinite}@keyframes computer-thinking{50%{opacity:.3}}
+@media(prefers-reduced-motion:reduce){.computer-status.thinking>span{animation:none}}
+.computer-moves{min-height:180px;flex:1;overflow:hidden}.computer-moves .analysis-moves{max-height:min(52vh,510px);overflow:auto;padding:9px}
+.computer-moves .analysis-move-score{display:none}.computer-moves button:disabled{opacity:1;cursor:default}
+.computer-actions{display:flex;flex-wrap:wrap;gap:7px}.computer-game-panel>.computer-actions{border-top:1px solid var(--line);padding:12px;margin-top:auto}
+.computer-actions button{font-size:.8rem}.computer-error{color:var(--danger,#e6a58e);font-size:.82rem;line-height:1.55;overflow-wrap:anywhere;margin:0}
+.computer-game-panel>.computer-error{padding:12px}.computer-error button{display:block;margin-top:8px}
+@media(min-width:1050px){.computer-workspace{grid-template-columns:minmax(280px,min(680px,calc(100dvh - 165px))) minmax(300px,1fr)}}
+@media(max-width:760px){
+ .computer-heading{gap:8px;margin-bottom:9px}.computer-heading h1{font-size:1.05rem}.computer-heading .muted{font-size:.72rem}
+ .computer-workspace{grid-template-columns:minmax(0,1fr);gap:9px}.computer-setup .computer-board-column{order:2}
+ .computer-board-column{width:100vw;max-width:100vw;margin-inline:calc(50% - 50vw)}
+ .computer-board-column .board-toolbar{padding-inline:8px;margin-top:5px}.computer-controls{padding:12px}
+ .computer-config-grid{gap:10px}.computer-controls form{gap:11px}.computer-engine-note{font-size:.72rem}
+ .computer-game-panel{min-height:0}.computer-status{padding:8px 10px;gap:8px}.computer-status>span{height:26px;width:26px;font-size:1.4rem}
+ .computer-status strong{font-size:.9rem}.computer-status small{font-size:.72rem}.computer-moves{min-height:90px}
+ .computer-moves .analysis-moves{max-height:24dvh;padding:5px}.computer-game-panel>.computer-actions{padding:8px;gap:5px}.computer-actions button{font-size:.75rem;padding:6px 8px}
+}
+
+/* Computer archive and mode settings share the compact playing workspace. */
+.computer-heading-actions{display:flex;align-items:center;gap:6px;margin-left:auto}.computer-heading-actions button{font-size:.78rem;white-space:nowrap;padding:6px 9px}
+.computer-history-panel{padding:0;overflow:hidden}.computer-history-panel>.computer-error{padding:12px 16px}.computer-history-table-wrap{overflow:auto}
+.computer-history-table{width:100%;border-collapse:collapse;font-size:.81rem}.computer-history-table th{color:var(--muted);text-align:left;font-size:.71rem;font-weight:500;padding:10px 13px;border-bottom:1px solid var(--line)}
+.computer-history-table td{padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:middle}.computer-history-table tbody tr:last-child td{border-bottom:0}
+.computer-history-table tbody tr:hover{background:color-mix(in srgb,var(--accent) 5%,transparent)}
+.computer-history-players{min-width:175px}.computer-history-players>span,.computer-history-match>span{display:flex;align-items:center;gap:6px;min-width:0;line-height:1.6}.computer-history-players b,.computer-history-match b{font-weight:450;overflow-wrap:anywhere}.computer-history-players b.human{font-weight:650}.computer-history-players i,.computer-history-match i{font-style:normal;color:var(--muted);width:15px;flex:none;text-align:center}
+.computer-history-date{color:var(--muted);white-space:nowrap;font-size:.74rem}.computer-history-cadence{white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--muted)}
+.computer-history-result{white-space:nowrap}.computer-history-result-label{display:block;font-weight:650;font-variant-numeric:tabular-nums}.computer-history-result-label.ongoing{color:var(--accent);font-size:.75rem;font-weight:500}.computer-history-result small{display:block;color:var(--muted);font-size:.68rem;margin-top:3px}
+.computer-history-actions{max-width:300px}.computer-history-actions button{font-size:.72rem;padding:5px 7px;margin:2px;white-space:nowrap;min-height:30px}
+.computer-history-pagination{padding:10px 13px;display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--line);font-size:.76rem;color:var(--muted)}.computer-history-pagination>div{display:flex;gap:5px}.computer-history-pagination button{font-size:1.15rem;line-height:1;min-width:33px;min-height:32px}
+.computer-history-empty{padding:32px 18px;text-align:center;color:var(--muted)}.computer-history-empty strong{font-weight:550;color:var(--ink)}.computer-history-empty p{font-size:.82rem;line-height:1.55;margin:8px auto;max-width:410px}
+.computer-copy-settings{display:grid;gap:15px}.computer-copy-settings label:not(.computer-check){display:flex;flex-direction:column;gap:7px}.computer-copy-settings select{width:100%;min-width:0}.computer-copy-settings p{margin:0;line-height:1.5;font-size:.8rem}.computer-copy-settings .computer-check{display:flex;flex-direction:row;align-items:flex-start;gap:9px;line-height:1.4}.computer-check input[type=checkbox]{width:16px;height:16px;flex:none;margin:2px 0 0}
+.computer-history-detail-heading{display:flex;align-items:center;gap:10px;margin-bottom:10px}.computer-history-detail-heading>span{font-size:.75rem;color:var(--muted)}.computer-history-detail-heading>button{font-size:.75rem}
+.computer-history-match{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:12px 15px;border-bottom:1px solid var(--line);font-size:.82rem}.computer-history-match>span{grid-column:1}.computer-history-match>strong{grid-column:2;grid-row:1/3;align-self:center;font-variant-numeric:tabular-nums;white-space:nowrap}
+.computer-clocks{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.computer-clock{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid var(--line);border-radius:6px;padding:9px 10px;background:var(--bg);min-width:0;transition:background .15s,border-color .15s}
+.computer-clock>small{font-size:.72rem;color:var(--muted)}.computer-clock>strong{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:1.6rem;line-height:1;font-weight:650;font-variant-numeric:tabular-nums;white-space:nowrap;letter-spacing:-.04em}
+.computer-clock.active{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,var(--bg))}.computer-clock.active>small{color:var(--accent)}
+.computer-clock.low>strong,.computer-clock.flagged>strong{color:var(--danger,#e6a58e)}.computer-clock.flagged{border-color:var(--danger,#e6a58e)}
+.computer-clocks.paused .computer-clock.active{border-color:var(--line);background:var(--bg)}.computer-clocks.paused .computer-clock.active>small{color:var(--muted)}
+.computer-clock-controls{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 12px 9px;border-bottom:1px solid var(--line);font-size:.72rem;color:var(--muted)}.computer-clock-controls button{font-size:.73rem;padding:5px 9px;min-height:30px}.computer-clock-controls small{font-size:.7rem}.computer-clock-controls [data-paused]{color:var(--accent)}
+@media(max-width:760px){
+ .computer-heading-actions{gap:4px}.computer-heading-actions button{font-size:.72rem;padding:5px 7px;min-height:32px}.computer-heading .computer-workspace-status{margin-left:0}
+ .computer-history-page .computer-heading h1{flex-basis:100%;font-size:1.05rem}.computer-history-page .computer-heading-actions{margin-left:0}
+ .computer-history-table-wrap{overflow:visible}.computer-history-table,.computer-history-table tbody{display:block}.computer-history-table thead{display:none}
+ .computer-history-table tbody tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:12px;border-bottom:1px solid var(--line)}.computer-history-table tbody tr:last-child{border-bottom:0}
+ .computer-history-table td{display:block;padding:0;border:0}.computer-history-players{min-width:0;grid-column:1;grid-row:1/3}.computer-history-players>span{line-height:1.7}.computer-history-result{grid-column:2;grid-row:1/3;text-align:right;align-self:center}
+ .computer-history-date{grid-column:1;grid-row:3;font-size:.71rem;white-space:normal}.computer-history-cadence{grid-column:2;grid-row:3;text-align:right;font-size:.72rem}.computer-history-actions{grid-column:1/-1;max-width:none;display:flex;gap:5px;margin-top:5px}.computer-history-actions button{margin:0;font-size:.73rem;padding:6px 9px;min-height:34px}
+ .computer-history-pagination{padding:10px 12px}.computer-history-detail-heading{gap:8px;flex-wrap:wrap}.computer-history-detail-heading>span{font-size:.7rem}.computer-history-match{padding:8px 10px;font-size:.77rem}
+ .computer-clocks{gap:6px;padding:8px 9px}.computer-clock{padding:8px 9px}.computer-clock>strong{font-size:1.5rem}.computer-clock>small{font-size:.7rem}.computer-clock-controls{padding:0 9px 8px}
+}
+
+.computer-history-table .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.computer-history-page [data-history-board] .square{cursor:default}
+
+.computer-history-result small.computer-copy-warning{color:var(--danger,#e6a58e)}
+
+@media(max-width:380px){.computer-clock{padding:8px 7px;gap:5px}.computer-clock>strong{font-size:1.3rem}.computer-clock>small{font-size:.66rem}.computer-history-actions{flex-wrap:wrap}}
+
+.computer-history-result-label.won{color:#a5d6a7}.computer-history-result-label.lost{color:var(--danger,#e6a58e)}.computer-history-result-label.draw{color:var(--muted)}

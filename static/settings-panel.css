@@ -1,0 +1,16 @@
+.backup-archive-list{list-style:none;padding:0;margin:14px 0;max-height:320px;overflow:auto}.backup-archive-list li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:0.75rem}.backup-archive-list .actions{flex-shrink:0}.settings-base-selection{max-height:220px;overflow:auto;display:grid;gap:7px;margin:12px 0}.settings-base-selection .checkbox{display:flex;align-items:center;gap:8px}#backup-settings>.actions{margin-top:14px;flex-wrap:wrap}#backup-settings form,#learning-preferences,#startup-preferences,#resource-settings form{display:grid;gap:10px}#backup-settings input[name=destination]{min-width:0;width:100%;box-sizing:border-box}@media(max-width:650px){.backup-archive-list li{align-items:flex-start;flex-direction:column;gap:6px}.backup-archive-list button,#backup-settings button,#learning-preferences button,#startup-preferences button,#resource-settings button{min-height:36px}.settings-base-selection{max-height:180px}}
+
+#backup-settings .checkbox{display:flex;align-items:center;gap:8px}#backup-settings .checkbox input,.settings-base-selection .checkbox input{width:auto;margin:0;flex:0 0 auto}#backup-settings form>button,#learning-preferences>button,#startup-preferences>button,#resource-settings form>button{justify-self:start}
+
+.settings-workspace{max-width:860px;min-width:0;scroll-margin-top:var(--app-header-height,46px)}
+.settings-tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,7.5em),1fr));font-size:.75rem;gap:4px;position:sticky;top:var(--app-header-height,46px);z-index:10;margin:0 0 16px;padding:6px 0 9px;border-bottom:1px solid var(--line);background:var(--bg)}
+.settings-tabs>button{display:flex;flex:1;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;min-height:54px;padding:8px 6px;border:0;border-radius:6px;background:transparent;color:var(--muted);font-size:0.75rem;white-space:normal}
+.settings-tabs>button>span{min-width:0;max-width:100%;overflow-wrap:anywhere;text-align:center}
+.settings-tabs>button>.ui-icon{flex-shrink:0}
+.settings-tabs>button[aria-selected=true]{background:var(--tint);color:var(--accent);box-shadow:inset 0 -2px var(--accent)}
+.settings-tabs>button:hover{background:var(--soft);color:var(--ink)}
+.settings-tabs>button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.settings-workspace>[data-settings-panel]{min-width:0;outline-offset:4px}
+.settings-workspace>[data-settings-panel][hidden]{display:none!important}
+.settings-workspace .settings-width{max-width:none}
+@media(max-width:650px){.settings-tabs{grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;margin-bottom:12px}.settings-tabs>button{flex-direction:row;justify-content:flex-start;gap:6px;min-height:40px;padding:8px 6px;font-size:0.75rem}.settings-tabs>button>span{text-align:start}}

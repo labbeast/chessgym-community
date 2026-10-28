@@ -1,0 +1,30 @@
+name: Feature or workflow suggestion
+description: Suggest a useful improvement for studying chess.
+title: "[Idea] "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: Describe the study workflow and what gets in the way today.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would help?
+      description: A concrete example is welcome; an implementation plan is not required.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives or existing workarounds
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Optional ways you could help
+      options:
+        - label: I can test an early version.
+        - label: I can help clarify the chess workflow or provide an original example.
+        - label: I would like to contribute code, documentation or translations.

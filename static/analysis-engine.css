@@ -1,0 +1,37 @@
+.engine-actions{display:inline-flex;align-items:center;gap:2px;flex-shrink:0}
+/* Only the analysis workspace docks its engine beside the chessboard. */
+.engine-panel.engine-docked{border:0;border-radius:0;background:transparent;min-width:0}
+.engine-docked .engine-head{display:grid;grid-template-columns:30px minmax(55px,max-content) minmax(65px,1fr) auto auto;gap:7px;padding:7px 9px;min-height:48px;background:var(--soft)}
+.engine-docked .engine-head button{min-height:28px;height:28px;padding:1px 5px;border-color:transparent;background:transparent}
+.engine-docked .engine-head .engine-toggle[aria-pressed=true]{color:var(--accent);background:var(--tint)}
+/* Keep the headline evaluation compact independently of global text sizing. */
+.engine-docked .engine-score{font-size:20px;line-height:1.1;font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap}
+.engine-docked .engine-name{min-width:0;font-size:0.6875rem;line-height:1.25;color:var(--muted)}
+.engine-docked .engine-name small{display:block;font-size:0.625rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.engine-docked .engine-head .engine-arrow-control{margin:0;gap:3px;flex-wrap:nowrap;font-size:0.8125rem}
+.engine-docked .engine-arrow-control select{min-height:26px;width:40px;padding:2px 3px;font-size:0.6875rem;border-color:transparent;background:transparent}
+.engine-docked .engine-output{padding:0;min-height:0}
+.engine-docked .engine-output>p{padding:7px 10px;font-size:0.625rem}
+.engine-docked .engine-line{display:flex;align-items:center;gap:7px;padding:0 9px;min-height:29px;border-bottom:1px solid var(--line);margin:0}
+.engine-docked .engine-line:last-of-type{margin:0;border-bottom:0}
+.engine-docked .engine-line strong{min-width:38px;flex:0 0 38px;font-size:0.6875rem;line-height:1.2}
+.engine-docked .engine-line .engine-moves{display:flex;flex-wrap:nowrap;min-width:0;flex:1;white-space:nowrap;overflow-x:auto;overflow-y:hidden;overflow-wrap:normal;line-height:1.7;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.engine-docked .engine-moves::-webkit-scrollbar{height:3px}
+.engine-docked .engine-moves::-webkit-scrollbar-thumb{background:var(--line);border-radius:2px}
+.engine-docked .engine-moves .engine-move{font-size:0.6875rem;min-height:25px;white-space:nowrap;padding:1px 2px}
+.engine-docked .engine-line>small{flex:0 0 auto;font-size:0.5625rem;margin-left:0}
+.engine-docked .engine-output>.engine-help{display:none}
+.board-toolbar button.copy-pgn{font-size:0.6875rem;padding:3px 7px}
+@media(max-width:850px),(max-width:1000px) and (max-height:500px){
+ .board-toolbar .copy-verb{display:none}
+ .engine-docked .engine-head{grid-template-columns:30px minmax(0,1fr) auto auto;gap:4px;padding:0 6px;min-height:30px}
+ .engine-docked .engine-score{display:none}
+ .engine-docked .engine-head button{height:28px;min-height:28px}
+ .engine-docked .engine-name{display:flex;align-items:center;gap:7px;white-space:nowrap;overflow:hidden;font-size:0.625rem}
+ .engine-docked .engine-name small{margin:0;min-width:0;font-size:0.5625rem;overflow:hidden;text-overflow:ellipsis}
+ .engine-docked .engine-arrow-control select{min-height:28px}
+ .engine-docked .engine-line{min-height:30px;padding-inline:6px;gap:5px}
+ .engine-docked .engine-line strong{min-width:36px;flex-basis:36px;font-size:0.6875rem}
+ .engine-docked .engine-moves .engine-move{min-height:28px;padding:1px 3px;font-size:0.75rem}
+ .engine-docked .engine-output>p{margin:0;padding:5px 8px;line-height:1.35}
+}

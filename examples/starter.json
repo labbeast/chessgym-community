@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "license": "CC0-1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "provenance": "Original ChessGym teaching examples. These are illustrative lines, not attributed historical games. No third-party book annotations or commercial collection are included.",
+  "examples": [
+    {
+      "key": "repertoire",
+      "mode": "repertoire",
+      "name": "Exemple · Répertoire italien",
+      "tags": [
+        "Exemples",
+        "Ouvertures"
+      ],
+      "settings": {
+        "type": "moves",
+        "review_enabled": true,
+        "is_repertoire": true,
+        "color": "white"
+      },
+      "entries": [
+        {
+          "title": "Premiers pas dans l’Italienne / Italian opening starter",
+          "pgn": "[Event \"ChessGym teaching example\"]\n[White \"White repertoire\"]\n[Black \"Illustrative replies\"]\n[Result \"*\"]\n[Annotator \"ChessGym\"]\n[Source \"Original teaching example\"]\n[License \"CC0-1.0\"]\n\n{Ligne pédagogique, sans promesse d’avantage. / A teaching line, not a claim of an advantage.}\n1. e4 {Occuper le centre. / Occupy the centre.} e5 2. Nf3 {Développer une pièce en attaquant e5. / Develop with an attack on e5.} Nc6 3. Bc4 Bc5 (3... Nf6 4. d3 {Soutenir le centre avant de roquer. / Support the centre before castling.}) 4. c3 Nf6 5. d4 {Explorer aussi les variantes avec d3. / Also explore plans with d3.} *"
+        }
+      ]
+    },
+    {
+      "key": "guess",
+      "mode": "guess",
+      "name": "Exemple · Deviner le coup",
+      "tags": [
+        "Exemples",
+        "Développement"
+      ],
+      "settings": {
+        "type": "game",
+        "guess_enabled": true
+      },
+      "entries": [
+        {
+          "title": "Développer ses pièces / Develop your pieces",
+          "pgn": "[Event \"ChessGym illustrative game\"]\n[White \"White (example)\"]\n[Black \"Black (example)\"]\n[Result \"*\"]\n[Annotator \"ChessGym\"]\n[Source \"Original teaching example\"]\n[License \"CC0-1.0\"]\n\n{Suite fictive de développement. Deviner les coups blancs et comparer avec Stockfish. / An illustrative development sequence. Guess White’s moves and compare with Stockfish.}\n1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. d3 Nf6 5. O-O O-O 6. c3 d6 7. Re1 a6 8. Bb3 Ba7 9. Nbd2 Be6 10. Bc2 Qd7 11. Nf1 Rae8 12. Ng3 h6 *"
+        }
+      ]
+    },
+    {
+      "key": "reading",
+      "mode": "reading",
+      "name": "Exemple · Lecture commentée",
+      "tags": [
+        "Exemples",
+        "Lecture"
+      ],
+      "settings": {
+        "type": "game",
+        "reading_enabled": true
+      },
+      "entries": [
+        {
+          "title": "Centre, développement et roque / Centre, development and castling",
+          "pgn": "[Event \"ChessGym reading lesson\"]\n[White \"White (example)\"]\n[Black \"Black (example)\"]\n[Result \"*\"]\n[Annotator \"ChessGym\"]\n[Source \"Original teaching example\"]\n[License \"CC0-1.0\"]\n\n{Avancer coup par coup; le signet garde votre place. Les variantes se consultent séparément. / Move through the lesson; the bookmark keeps your place. Explore variations separately.}\n1. d4 {Le pion contrôle e5 et ouvre le fou c1. / This pawn controls e5 and opens the c1 bishop.} d5 2. c4 {Mettre le centre noir sous tension. / Put pressure on Black’s centre.} e6 (2... c6 {Une autre façon de soutenir d5. / Another way to support d5.}) 3. Nc3 Nf6 4. Nf3 {Les cavaliers soutiennent le centre. / The knights support the centre.} Be7 5. Bf4 O-O 6. e3 {Ouvrir le chemin du fou f1. / Open a path for the f1 bishop.} c5 7. Bd3 Nc6 8. O-O {Les rois sont à l’abri; comparer les ruptures centrales possibles. / Both kings have castled; compare possible central pawn breaks.} *"
+        }
+      ]
+    }
+  ]
+}

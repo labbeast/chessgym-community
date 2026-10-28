@@ -1,0 +1,52 @@
+<!doctype html><html lang="fr"><meta charset="utf-8"><title>Reading browser regression</title>
+<body><pre id="result">Running</pre><div id="moves"></div>
+<script type="module">
+import {ReadingTracker,flushReadingWrites,mainlineNodes} from '/static/reading-progress.js';
+import {MoveMenu} from '/static/move-menu.js';
+import {analysisMovesHtml} from '/static/analysis-moves.js';
+const output=document.querySelector('#result'),errors=[];
+window.addEventListener('error',event=>errors.push(String(event.error||event.message)));
+window.addEventListener('unhandledrejection',event=>errors.push(String(event.reason)));
+const check=(value,message)=>{if(!value)throw new Error(message);};
+let tracker,menu;
+try{
+ const doc={id:998,base_id:2,headers:{Result:'*'},reading:{enabled:true,entry_id:998,base_id:2,bookmark_path:'',read_moves:0,total_moves:3,percent:0,active_seconds:0,completed:false,visited:false,content_key:'browser-fixture',revision:0},nodes:[
+  {path:'',parent:null,children:['0','1'],fen:'root w - - 0 1'},
+  {path:'0',parent:'',children:['0.0'],san:'e4',fen:'first b - - 0 1'},
+  {path:'0.0',parent:'0',children:['0.0.0'],san:'e5',fen:'second w - - 0 2'},
+  {path:'0.0.0',parent:'0.0',children:[],san:'Nf3',fen:'third b - - 1 2'},
+  {path:'1',parent:'',children:[],san:'d4',fen:'variant b - - 0 1'}]};
+ let stored=structuredClone(doc.reading),requests=0;
+ const request=async(url,options={})=>{
+  check(url==='/api/entries/998/reading','Fixture API only');
+  if(!options.method)return structuredClone(stored);
+  requests++;const body=options.body;
+  check(body.revision===stored.revision,'Revision');
+  const ply=body.path?body.path.split('.').length:0;
+  stored.read_moves=body.mode==='bookmark'?ply:Math.max(stored.read_moves,ply);
+  if(body.mode==='bookmark')stored.revision++;
+  stored.bookmark_path=Array(stored.read_moves).fill('0').join('.');stored.visited=true;
+  stored.percent=stored.read_moves/3*100;stored.active_seconds+=body.active_seconds;
+  return structuredClone(stored);
+ };
+ // Deliberately use native Window timers, the boundary our fake clock missed.
+ tracker=new ReadingTracker({doc,request,onError:error=>errors.push(String(error))});
+ tracker.visit(doc,'0.0.0');tracker.visit(doc,'0');tracker.visit(doc,'1');
+ await new Promise(resolve=>setTimeout(resolve,350));await flushReadingWrites();
+ check(stored.read_moves===3,'Automatic furthest mainline bookmark');
+ const host=document.querySelector('#moves');host.innerHTML=analysisMovesHtml(doc,'0',null,null,tracker.reading);
+ check(host.querySelector('.reading-bookmark')?.dataset.path==='0.0.0','Automatic visible marker');
+ let bookmarkAction;
+ menu=new MoveMenu(host,{getDoc:()=>doc,canBookmark:path=>!!tracker.reading.enabled&&mainlineNodes(doc).some(node=>node.path===path),onAction:(action,path)=>{check(action==='bookmark','Bookmark command');bookmarkAction=tracker.bookmark(path);}});
+ host.querySelector('[data-path="0"]').dispatchEvent(new MouseEvent('contextmenu',{bubbles:true,cancelable:true,clientX:30,clientY:30}));
+ const button=document.querySelector('[data-tree-action="bookmark"]');check(button&&!button.disabled,'Right-click bookmark available');button.click();
+ check(await bookmarkAction,'Manual bookmark succeeded');check(stored.read_moves===1,'Manual rewind');
+ tracker.seconds=1;await tracker.flush();check(stored.read_moves===1,'Heartbeat preserves manual bookmark');
+ host.innerHTML=analysisMovesHtml(doc,'0',null,null,tracker.reading);
+ check(host.querySelectorAll('.reading-bookmark').length===1&&host.querySelector('.reading-bookmark').dataset.path==='0','Manual visible marker');
+ menu.dispose();menu=null;tracker.dispose();tracker=null;await flushReadingWrites();
+ check(!errors.length,'No browser exceptions: '+errors.join('; '));
+ output.textContent=JSON.stringify({status:'passed',native_timers:true,automatic_bookmark:true,right_click_bookmark:true,manual_rewind:true,visible_marker:true,disposed:true,requests});
+}catch(error){output.textContent=JSON.stringify({status:'failed',error:String(error.stack||error),errors});}
+finally{try{menu?.dispose();tracker?.dispose();}catch(error){output.textContent=JSON.stringify({status:'failed',cleanup:String(error)});}}
+</script></body></html>

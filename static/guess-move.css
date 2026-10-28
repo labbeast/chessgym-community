@@ -1,0 +1,35 @@
+.guess-setup-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,1fr);gap:14px}.guess-setup-grid .panel{min-width:0}.guess-search{display:flex;gap:7px;margin:12px 0}.guess-search input{min-width:0;flex:1}.guess-game-row,.guess-history-row{display:flex;flex-direction:column;align-items:flex-start;text-align:left;width:100%;gap:4px;margin:5px 0;padding:10px 12px}.guess-game-row small,.guess-history-row small{color:var(--muted)}.guess-history{max-height:60vh;overflow:auto}.guess-launch{max-width:640px;margin:auto}.guess-launch form{display:grid;gap:15px}.guess-workbench{display:grid;grid-template-columns:minmax(280px,1.3fr) minmax(300px,1fr);gap:14px;align-items:start}.guess-workbench [data-board]{min-width:0;max-width:calc(100dvh - 150px)}.guess-notebook{min-width:0;max-height:calc(100dvh - 150px);overflow:auto;display:flex;flex-direction:column}.guess-status{padding:13px;font-weight:600;border-bottom:1px solid var(--line)}.guess-moves{padding:10px;max-height:34vh;overflow:auto;flex:1}.guess-score,.guess-result>strong{color:var(--accent);font-size:1.5rem}.guess-result{display:flex;align-items:center;gap:12px;padding:12px}.guess-comparisons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;padding:0 10px}.guess-comparisons button{display:flex;flex-direction:column;gap:5px;min-width:0}.guess-comparisons small{font-size:.75rem;white-space:normal}.guess-comparisons strong{font-size:1.1rem}.guess-comment{white-space:pre-wrap;line-height:1.5;padding:0 13px}.guess-notebook .hint{padding:0 12px}.guess-actions{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line);position:sticky;bottom:0;background:var(--surface)}.guess-notebook details{padding:10px}.guess-attempts button{display:grid;grid-template-columns:1fr auto auto;gap:15px;width:100%;text-align:left;margin:4px 0}.guess-notebook [hidden]{display:none!important}@media(max-width:700px){.guess-setup-grid,.guess-workbench{grid-template-columns:minmax(0,1fr)}.guess-page:has(.guess-workbench) .page-title{margin:5px 0}.guess-page:has(.guess-workbench) .page-title h1{font-size:1rem}.guess-page:has(.guess-workbench) .page-title p{font-size:.8rem}.guess-workbench{gap:5px}.guess-workbench [data-board]{max-width:none}.guess-notebook{max-height:none}.guess-status{padding:7px}.guess-comparisons{padding:0 6px}.guess-result{padding:7px}.guess-actions{padding:7px}.guess-moves{max-height:22vh}.guess-history{max-height:45vh}}
+
+.guess-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:12px}.guess-summary div{display:flex;flex-direction:column;gap:4px}.guess-summary strong{font-size:1.4rem;color:var(--accent)}.guess-summary small{color:var(--muted)}
+/* Analysis notebooks occupy column two on desktop; explicitly reset on mobile. */
+@media(min-width:701px){.guess-workbench{grid-template-columns:minmax(280px,min(56%,calc(100% - 314px),calc(100dvh - 330px))) minmax(300px,1fr)}}
+.guess-workbench>[data-board]{grid-column:1;width:100%;max-width:max(280px,calc(100dvh - 330px))}
+.guess-workbench>.guess-notebook{grid-column:2;height:calc(100dvh - 190px);min-height:350px;max-height:none}
+@media(max-width:700px){
+ .guess-page .guess-workbench{width:calc(100% + 20px);margin-inline:-10px}
+ .guess-workbench>[data-board]{grid-column:1;grid-row:1;width:100%;max-width:none}
+ .guess-workbench>.guess-notebook{grid-column:1;grid-row:2;width:calc(100% - 20px);margin-inline:10px;height:auto;min-height:0;max-height:none}
+}
+
+.guess-setup-grid.history-layout{grid-template-columns:minmax(0,1fr)}
+.guess-picker-heading{flex-wrap:wrap;align-items:flex-start}
+
+.guess-page .guess-game-details{display:flex;flex-wrap:wrap;column-gap:5px;row-gap:2px;color:var(--muted);overflow-wrap:anywhere}
+.guess-workbench .board-player-band{min-height:56px;padding:9px 12px;gap:10px;line-height:1.3;border:1px solid var(--line)}
+.guess-workbench .board-player-band[data-board-clock="top"]{border-bottom:0;border-radius:8px 8px 0 0}
+.guess-workbench .board-player-band[data-board-clock="bottom"]{border-top:0;border-radius:0 0 8px 8px}
+.guess-player-color{width:12px;height:12px;border:1px solid #897a6c;border-radius:50%;flex:none}
+.guess-player-color.white{background:#fff9ef}.guess-player-color.black{background:#272321}
+.guess-player-info{display:flex;flex:1;min-width:0;flex-wrap:wrap;align-items:baseline;gap:2px 8px}
+.guess-player-name{font-size:.95rem;font-weight:600;overflow-wrap:anywhere}
+.guess-player-rating{font-size:.8rem;color:var(--muted);white-space:nowrap}
+.guess-player-clock{display:flex;flex:none;flex-direction:column;align-items:flex-end;gap:2px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.guess-player-clock-value{font-size:1.45rem;font-weight:600;line-height:1.1}
+.guess-player-clock.is-turn .guess-player-clock-value{color:var(--accent)}
+.guess-player-clock small{font-size:.7rem;color:var(--muted)}
+@media(max-width:700px){
+ .guess-workbench .board-player-band{padding:8px 10px;gap:8px;min-height:52px}
+ .guess-player-name{font-size:.9rem}.guess-player-clock-value{font-size:1.3rem}
+}
+
+.guess-base-card{display:flex;flex-direction:column}.guess-base-card .reading-card-stats{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:18px}.guess-base-card .actions{margin-top:auto}

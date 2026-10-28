@@ -1,0 +1,31 @@
+/* Training section navigation follows the Puzzles underline tabs. */
+.training-header{display:grid;grid-template-columns:minmax(0,1fr);align-items:center;gap:12px;margin-bottom:16px;min-width:0}
+.training-header>.training-tabs,.training-header>.training-header-tools,.training-header>.puzzle-header-tools{flex-basis:100%;width:100%}
+.training-header>.puzzle-header-tools{justify-content:center}
+.training-header>.training-tabs{flex-basis:auto;width:max-content;margin-inline:auto}
+.training-header-copy{min-width:0;flex:1 1 100%}
+.training-header-copy h1{margin-bottom:4px}
+.training-header-copy>p,.training-header-copy>span{margin:0;font-size:0.75rem;color:var(--muted)}
+.training-header-tools{display:grid;justify-items:center;gap:8px;min-width:0;max-width:100%;margin:0}
+.training-header .training-tabs{display:flex;align-items:stretch;flex-wrap:nowrap;gap:4px;min-width:0;width:max-content;max-width:100%;margin:0 auto;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:thin}
+.training-header .training-tabs>button,.training-header .training-tabs>.training-tab{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;min-height:38px;margin:0;padding:9px 14px;border:0;border-radius:0;background:transparent;color:var(--muted);font-size:0.875rem;font-weight:400;line-height:1.35;white-space:nowrap;text-decoration:none}
+.training-header .training-tabs>.training-tab{cursor:default}
+.training-header .training-tabs>button:hover:not(:disabled){background:var(--soft);color:var(--ink)}
+.training-header .training-tabs>[aria-current=page],.training-header .training-tabs>[aria-selected=true],.training-header .training-tabs>[aria-pressed=true]{background:transparent;color:var(--accent);box-shadow:inset 0 -2px var(--accent)}
+.training-header .training-tabs>button:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+.training-header .training-tabs>button:disabled{opacity:.4;cursor:default}
+.skill-header.training-header h1{display:block}
+.training-header>h1{flex-basis:100%;margin-bottom:0}
+.training-header>.training-tabs{justify-self:center;margin-inline:auto}
+.training-header .puzzle-header-tools .training-tabs{flex:0 1 auto}
+.training-settings-dialog{width:min(560px,calc(100vw - 24px))}
+.training-settings-dialog [data-training-settings-fields]{display:grid;gap:14px}
+.training-settings-dialog [data-training-settings-fields] label{display:grid;gap:6px}
+.training-settings-dialog [data-training-settings-fields] .skill-check{display:flex;flex-direction:row;align-items:center;gap:8px}
+@media(max-width:760px){
+ .training-header{gap:8px;margin-bottom:12px}
+ .training-header-copy{flex-basis:100%}
+ .training-header-tools,.training-header>.training-tabs,.training-header .puzzle-header-tools{width:100%;min-width:0}
+ .training-header .training-tabs{flex:1 1 auto;width:100%;gap:0}
+ .training-header .training-tabs>button,.training-header .training-tabs>.training-tab{flex:1 0 auto;min-height:42px;padding:7px 10px;font-size:0.8125rem}
+}

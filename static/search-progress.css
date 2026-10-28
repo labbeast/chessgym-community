@@ -1,0 +1,8 @@
+.search-progress{min-width:0;margin:10px 0 14px;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:8px}
+.search-progress-label{color:var(--text);font-size:0.8125rem;line-height:1.5;overflow-wrap:anywhere}
+.search-progress-track{height:6px;margin-top:9px;overflow:hidden;border-radius:999px;background:var(--line)}
+.search-progress-track>span{display:block;width:32%;height:100%;border-radius:inherit;background:var(--accent);animation:search-progress-travel 1.6s ease-in-out infinite}
+.search-progress .hint{margin:8px 0 0;line-height:1.5}
+@keyframes search-progress-travel{from{transform:translateX(-110%)}to{transform:translateX(330%)}}
+@media(prefers-reduced-motion:reduce){.search-progress-track>span{animation:none;transform:translateX(105%)}}
+@media(forced-colors:active){.search-progress-track{border:1px solid CanvasText}.search-progress-track>span{background:Highlight;forced-color-adjust:none}}

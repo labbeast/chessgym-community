@@ -1,0 +1,82 @@
+{
+  "license": "CC0-1.0",
+  "author": "Kenney",
+  "retrieved": "2026-10-27",
+  "processing": "Decode Ogg Vorbis, downmix to mono, apply the per-file gain, encode 44,100 Hz 16-bit PCM WAV. No Lichess samples are used.",
+  "packs": {
+    "impact": {
+      "title": "Impact Sounds 1.0",
+      "page": "https://kenney.nl/assets/impact-sounds",
+      "archive": "https://kenney.nl/media/pages/assets/impact-sounds/87b4ddecda-1677589768/kenney_impact-sounds.zip",
+      "sha256": "029d734af1582474edf3a694d1b0cebc97c1c152f2f39fa34d4c2bafc5de77f8"
+    },
+    "interface": {
+      "title": "Interface Sounds 1.0",
+      "page": "https://kenney.nl/assets/interface-sounds",
+      "archive": "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip",
+      "sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232"
+    }
+  },
+  "files": [
+    {
+      "event": "move",
+      "file": "move.wav",
+      "pack": "impact",
+      "source": "Audio/impactWood_light_000.ogg",
+      "source_sha256": "eb45e35b4bed784d3f120de4afec4b0d6ac09d9e143cce8cfcb7d739e1b1f3c3",
+      "gain": 0.8,
+      "sample_rate": 44100,
+      "sample_count": 11585,
+      "duration_seconds": 0.2626984126984127,
+      "sha256": "9763d34e736c8f39f9a08b3acf3c010580db734fcb71adae6f2958a99c9f6730"
+    },
+    {
+      "event": "capture",
+      "file": "capture.wav",
+      "pack": "impact",
+      "source": "Audio/impactWood_medium_000.ogg",
+      "source_sha256": "1723a9fd25103ed41af06054814e84e65f4a772bac86ab2dc927da93d9592ff5",
+      "gain": 0.8,
+      "sample_rate": 44100,
+      "sample_count": 14543,
+      "duration_seconds": 0.3297732426303855,
+      "sha256": "b8d6dd2564c21a0877ee038d6b673cbd67238ba9a943fc9ee1ccebdf76b5e1aa"
+    },
+    {
+      "event": "correct",
+      "file": "correct.wav",
+      "pack": "interface",
+      "source": "Audio/confirmation_001.ogg",
+      "source_sha256": "063564703b6094d70718a3e787a55cc9141611e4ecd6b6637f8828f79b4a8c3a",
+      "gain": 0.35,
+      "sample_rate": 44100,
+      "sample_count": 12782,
+      "duration_seconds": 0.28984126984126984,
+      "sha256": "0d75651be2c8c5fe2d3c22a940cc052af23541ea5ee6613148b55c295249be1c"
+    },
+    {
+      "event": "incorrect",
+      "file": "incorrect.wav",
+      "pack": "interface",
+      "source": "Audio/error_004.ogg",
+      "source_sha256": "0b574cea597d96507e782ae9764f88482ce49f46e931e57054bf7150047f2d69",
+      "gain": 0.65,
+      "sample_rate": 44100,
+      "sample_count": 4480,
+      "duration_seconds": 0.10158730158730159,
+      "sha256": "b79ffb374d3443933e6f7a9806975c1d691518cffee1be92bb4f77671d738f65"
+    },
+    {
+      "event": "complete",
+      "file": "complete.wav",
+      "pack": "interface",
+      "source": "Audio/confirmation_002.ogg",
+      "source_sha256": "33b17a9a9a2397c62b285c52c33a907fdffb476909c99e42dde603f6a7a8b12c",
+      "gain": 0.65,
+      "sample_rate": 44100,
+      "sample_count": 23770,
+      "duration_seconds": 0.5390022675736962,
+      "sha256": "44bbd6075eea953f85fc82f1d302ee517e169d4edf8c083740adaa30feabf109"
+    }
+  ]
+}

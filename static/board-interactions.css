@@ -1,0 +1,29 @@
+
+/* Piece dragging is pointer based: scrolling stays available outside the board. */
+.chess-board{touch-action:none;user-select:none;-webkit-user-select:none}
+.chess-board-wrap{position:relative}
+.board-clock{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:24px;padding:3px 8px;background:var(--surface);color:var(--ink);line-height:1.125rem}
+.board-clock[hidden]{display:none}
+.board-clock-player{display:flex;align-items:baseline;gap:7px;min-width:0;overflow:hidden}
+.board-clock-side{flex:none;font-size:0.625rem;color:var(--muted)}
+.board-clock-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:0.6875rem}
+.board-clock-value{flex:none;min-width:5ch;text-align:right;font-size:0.8125rem;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.square{touch-action:none;-webkit-touch-callout:none}
+.square img{-webkit-user-drag:none;user-select:none}
+.square.drag-source img{opacity:0}
+.square.drag-target{box-shadow:inset 0 0 0 3px #ffffff75}
+.chess-board.dragging,.chess-board.dragging .square{cursor:grabbing}
+.board-drawings{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:7;overflow:visible}
+.chess-board.drawing,.chess-board.drawing .square{cursor:crosshair}
+.dragged-chess-piece{position:fixed;z-index:1000;pointer-events:none;object-fit:contain;transform:translate(-50%,-50%);filter:drop-shadow(0 3px 4px #0005);user-select:none;-webkit-user-drag:none}
+.chess-board.previewing .square img{opacity:.56}
+.chess-board.previewing .square.last:after{background:#b7bcc437}
+.board-preview-label{position:absolute;left:50%;bottom:7px;transform:translateX(-50%);z-index:8;pointer-events:none;padding:3px 9px;background:#202226d9;color:#f5f5f5;border-radius:5px;font-size:0.6875rem;white-space:nowrap;box-shadow:0 1px 4px #0002}
+.engine-line .engine-moves{display:flex;flex-wrap:wrap;gap:0;flex:1;min-width:0;line-height:1.85}
+.engine-move{display:inline-block;flex:0 0 auto;min-height:25px;min-width:0;padding:1px 3px;margin:0;border:0;border-radius:3px;background:transparent;font-size:0.6875rem;line-height:1.6;white-space:nowrap;vertical-align:baseline}
+.engine-move:hover:not(:disabled),.engine-move.preview-current{background:var(--tint);color:var(--accent);border:0}
+.engine-move:focus-visible{outline:1px solid var(--accent);outline-offset:0}
+.engine-move .move-number{color:var(--muted);font-size:0.625rem;margin-right:3px}
+@media(max-width:650px){.engine-move{font-size:0.75rem;min-height:29px;padding:2px 4px}.engine-move .move-number{font-size:0.6875rem}}
+
+.board-toolbar{flex-wrap:wrap}.board-toolbar .board-tools{margin-left:auto}.board-toolbar button.copy-fen{font-size:0.6875rem;padding:5px 8px}
