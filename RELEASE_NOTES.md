@@ -14,7 +14,8 @@ The first-run assistant offers three small examples: an opening repertoire, a Gu
 
 - PGN libraries, annotations, variations, advanced game and position search, and separately indexed reference collections.
 - Stockfish analysis, game reports, repertoire comparisons and transpositions, and exercises created from positions.
-- Opening repertoires, spaced reviews, annotated reading and persistent bookmarks.
+- Opening repertoires, move-frequency and branch-probability estimates, scans for unprepared replies, spaced reviews, annotated reading and persistent bookmarks.
+- Personal pattern exercises, with prefilled solutions when creating an exercise from a solved puzzle.
 - Classic Guess the Move, puzzles and Storm, blindfold visualization, coordinates and square-colour exercises.
 - Games against Stockfish or optional Maia 3, configurable clocks and saved game history.
 - Public-game synchronization from Chess.com and Lichess, with duplicate detection and preservation of annotations.
@@ -28,7 +29,7 @@ The experimental Guess the Move Mix is not included. The classic mode remains av
 
 The application build used for this release preparation passed **4,074 isolated tests** on Windows, **22 browser scenario groups** and **193 checks from an extracted source archive**. A fresh application folder and virtual environment were also tested with an actual Stockfish download, all three examples, a first repertoire answer, a reading bookmark, Guess the Move, engine analysis and persistence after restart. The Windows machine already had Python and Chrome installed; this was not a clean operating-system installation.
 
-Check the [GitHub Actions results](https://github.com/vincentinogec/chessgym-community/actions) for the published commit. Local test results do not substitute for those checks or guarantee every machine and workflow.
+Check the [GitHub Actions results](https://github.com/labbeast/chessgym-community/actions) for the published commit. Local test results do not substitute for those checks or guarantee every machine and workflow.
 
 - **Windows with Python 3.12 is the tested platform.** Linux has a limited startup/API test; Linux browser and engine workflows, and macOS, still need end-to-end validation.
 - **This release is local and single-user.** It accepts connections only from the same computer. It does not provide LAN, remote-server or multi-user access.

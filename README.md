@@ -14,7 +14,7 @@ This is the first community alpha, **v0.1.0-alpha.1**. The core tools are alread
 
 - **Keep a PGN library.** Organize personal games and study material, edit annotations and variations, search games and positions, and import large reference collections separately.
 - **Analyse and learn from games.** Use Stockfish, explore opening moves and transpositions, review a game report, and turn a position into an exercise. Public Chess.com and Lichess games can be synchronized into your library.
-- **Build and practise a repertoire.** Keep your own opening lines, compare them with reference games and review moves with spaced repetition.
+- **Build and practise a repertoire.** Keep your opening lines, compare references, estimate how often an opponent’s branch occurs and find unprepared replies. Review your chosen lines with spaced repetition.
 - **Study a game or lesson.** Follow annotated PGNs, save a reading bookmark and come back to the same position.
 - **Train in different ways.** Try Guess the Move, puzzles, Puzzle Storm, blindfold visualization, coordinates and square colours. Play against Stockfish or optional Maia 3, with saved games and configurable clocks.
 - **Track your work.** Set daily or weekly training goals, use a personal programme and look back at your activity and results.
@@ -22,6 +22,28 @@ This is the first community alpha, **v0.1.0-alpha.1**. The core tools are alread
 There is overlap with the kinds of work people do in ChessBase, Chessable or Chessbook. ChessGym is a smaller, independent project bringing some of those workflows together; it does not claim the same depth, polish or content catalogue. It does not include commercial courses or proprietary game databases.
 
 The interface is available in twelve languages: English, French, Spanish, German, Portuguese, Italian, Russian, Simplified Chinese, Japanese, Korean, Arabic and Hindi. Imported games and notes keep their original text.
+
+## Opening preparation and patterns
+
+The opening explorer shows move frequencies and an estimated **chance of encountering the branch you are studying**, both as a percentage and “1 in N”. It uses your chosen source and filters, treating your own repertoire moves as fixed and combining the frequencies of your opponent’s replies. These are estimates from the selected games, not a guarantee about your next opponent.
+
+With the Lichess explorer connected, ChessGym can scan for **gaps in your repertoire**: an opponent’s reply you have not prepared, or a position where you still need to choose your move. It ranks the lines it finds by estimated frequency. You can jump to the largest known gap, work on a response and add the line to your repertoire. The search has a depth and probability threshold and marks incomplete results.
+
+![Opening explorer with move percentages and estimated branch probability](docs/images/opening-explorer.png)
+
+The screenshot uses a labelled sample of 500 public Lichess games from January 2013 (CC0), with 18 games reaching the position shown. Its percentages illustrate that sample.
+
+You can also turn a position or pattern into a personal spaced-repetition exercise. From a solved puzzle, its solution is already filled in: when the proposed review database is the one you want, **Create exercise → Create exercise** is a two-click save. For a position taken from your own analysis, you enter the solution and choose its destination before saving.
+
+### Practice modes at a glance
+
+- Opening repertoire reviews with spaced repetition.
+- Custom positions and patterns: solve a position or play it against an engine.
+- Classic Guess the Move with Stockfish feedback.
+- Lichess puzzles and timed Puzzle Storm.
+- Blindfold calculation and position reconstruction.
+- Board coordinates and square-colour exercises.
+- Games against Stockfish or optional Maia 3.
 
 ## Install on Windows
 
@@ -31,7 +53,7 @@ Windows with **Python 3.12** is the tested starting point. You need an internet 
 2. Open PowerShell in the folder where you want to keep ChessGym, then run:
 
 ```powershell
-git clone https://github.com/vincentinogec/chessgym-community.git
+git clone https://github.com/labbeast/chessgym-community.git
 cd chessgym-community
 py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
@@ -40,7 +62,7 @@ py -3.12 -m venv .venv
 3. Double-click **Demarrer ChessGym.cmd** in the project folder. Your browser opens [localhost:8765](http://127.0.0.1:8765).
 4. In the welcome screen, choose **Add the examples**. Then leave Stockfish selected and choose **Download and configure**.
 
-You can also download and extract the source ZIP from [Releases](https://github.com/vincentinogec/chessgym-community/releases). In that case, open PowerShell in the extracted folder and start at the virtual-environment command above; Git is not needed to run the ZIP version. In-app application updates require a Git checkout.
+You can also download and extract the source ZIP from [Releases](https://github.com/labbeast/chessgym-community/releases). In that case, open PowerShell in the extracted folder and start at the virtual-environment command above; Git is not needed to run the ZIP version. In-app application updates require a Git checkout.
 
 There is no account, password or login screen. Three small examples are included: an Italian repertoire, a Guess the Move game and an annotated reading lesson. They are editable, use original French/English teaching comments under [CC0](examples/README.md), and do not require a large database download. Repertoire and reading work without an engine; Guess the Move uses Stockfish to score your moves.
 
@@ -82,7 +104,7 @@ Features and data formats can still evolve during the alpha series. Test a chang
 - Local training ratings are training indicators, not official playing ratings. Reference searches can report partial results when a configured search bound is reached.
 - Guess the Move Mix is not part of this release; classic Guess the Move is included.
 
-See [release notes](RELEASE_NOTES.md), [the changelog](CHANGELOG.md) and the [current CI results](https://github.com/vincentinogec/chessgym-community/actions) for scope and validation.
+See [release notes](RELEASE_NOTES.md), [the changelog](CHANGELOG.md) and the [current CI results](https://github.com/labbeast/chessgym-community/actions) for scope and validation.
 
 ## Help build it
 
@@ -90,7 +112,7 @@ The aim is an adaptable tool for players, made better by the people who use it. 
 
 The code is Python with a browser interface in JavaScript. You can read it, fork it and adapt it to your own study habits, including with AI coding tools. AI-assisted contributions are welcome when the contributor understands and checks the result; they follow the same review and testing expectations as any other contribution.
 
-Start with [CONTRIBUTING.md](CONTRIBUTING.md), [open an issue](https://github.com/vincentinogec/chessgym-community/issues) or look at existing discussions in the issue tracker. For a security issue, follow [SECURITY.md](SECURITY.md).
+Start with [CONTRIBUTING.md](CONTRIBUTING.md), [open an issue](https://github.com/labbeast/chessgym-community/issues) or look at existing discussions in the issue tracker. For a security issue, follow [SECURITY.md](SECURITY.md).
 
 ![Classic Guess the Move with an example game](docs/images/guess-the-move.png)
 

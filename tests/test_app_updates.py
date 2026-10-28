@@ -439,9 +439,9 @@ def test_real_managed_launcher_serves_owner_api_and_stops_its_tree(tmp_path):
 
 
 @pytest.mark.parametrize('remote', [
-    'https://github.com/vincentinogec/chessgym-community.git',
-    'https://github.com/vincentinogec/chessgym-community',
-    'git@github.com:vincentinogec/chessgym-community.git',
+    'https://github.com/labbeast/chessgym-community.git',
+    'https://github.com/labbeast/chessgym-community',
+    'git@github.com:labbeast/chessgym-community.git',
 ])
 def test_public_repository_is_an_allowed_update_origin(tmp_path, monkeypatch, remote):
     monkeypatch.setattr(worker, 'git', lambda *args, **kwargs: remote)
@@ -451,7 +451,7 @@ def test_public_repository_is_an_allowed_update_origin(tmp_path, monkeypatch, re
 @pytest.mark.parametrize('remote', [
     'https://github.com/vincentinogec/chess-gym.git',
     'https://github.com/another-owner/chessgym-community.git',
-    'https://github.com/vincentinogec/chessgym-community.git/extra',
+    'https://github.com/labbeast/chessgym-community.git/extra',
 ])
 def test_other_repositories_cannot_supply_application_updates(tmp_path, monkeypatch, remote):
     monkeypatch.setattr(worker, 'git', lambda *args, **kwargs: remote)

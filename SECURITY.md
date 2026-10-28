@@ -8,7 +8,7 @@ Please do not publish exploit details, credentials or affected personal data in 
 
 If GitHub private vulnerability reporting is available for this repository, use **Security → Report a vulnerability** at:
 
-https://github.com/vincentinogec/chessgym-community/security/advisories/new
+https://github.com/labbeast/chessgym-community/security/advisories/new
 
 If that option is unavailable, open a general issue requesting a private contact, without including vulnerability details. Wait for a private reporting channel before sharing the technical information. Private reporting availability is being configured as part of the community release.
 

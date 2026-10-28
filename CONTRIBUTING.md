@@ -4,7 +4,7 @@ ChessGym is a community project for chess players. Small, useful contributions a
 
 ## Start with an issue
 
-For a bug, use the [bug report form](https://github.com/vincentinogec/chessgym-community/issues/new?template=bug_report.yml). Include the version, operating system, steps to reproduce, what happened and what you expected. A small PGN made for the report is more useful than an entire personal database.
+For a bug, use the [bug report form](https://github.com/labbeast/chessgym-community/issues/new?template=bug_report.yml). Include the version, operating system, steps to reproduce, what happened and what you expected. A small PGN made for the report is more useful than an entire personal database.
 
 For a larger feature or refactor, describe the problem in an issue before starting. Explain the study workflow and who it helps. An implementation proposal is welcome, but a clear example of the problem is enough.
 

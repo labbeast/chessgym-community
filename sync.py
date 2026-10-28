@@ -350,5 +350,9 @@ def sync_account(ctx, payload):
         message = ('Synchronisation interrompue. Les parties déjà ajoutées sont conservées.' if isinstance(exc, jobs.JobCancelled) else str(exc) if isinstance(exc, sync_remote.RemoteError) else 'Synchronisation incomplète. Les parties déjà ajoutées sont conservées.')
         summary['message'] = message
         with db.get_conn() as conn:
-            conn.execute('UPDATE sync_accounts SET last_error=?,last_result=? WHERE id=? AND updated_at=?', (message, json.dumps(summary, ensure_ascii=False), account['id'], account['updated_at']))
+            # A rapid edit can retain the same wall-clock timestamp on Windows.
+            # Keep this attempt's result attached to its complete connection identity.
+            conn.execute('''UPDATE sync_accounts SET last_error=?,last_result=?
+                            WHERE id=? AND site=? AND username=? AND base_id=? AND updated_at=?''',
+                         (message, json.dumps(summary, ensure_ascii=False), account['id'], *_identity(account)))
         raise

@@ -15,7 +15,7 @@ Les douze langues proposées couvrent l’ensemble du catalogue de l’interface
 Installe [Python 3.12](https://www.python.org/downloads/) et [Git](https://git-scm.com/downloads/win). Dans PowerShell :
 
 ```powershell
-git clone https://github.com/vincentinogec/chessgym-community.git
+git clone https://github.com/labbeast/chessgym-community.git
 cd chessgym-community
 py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt

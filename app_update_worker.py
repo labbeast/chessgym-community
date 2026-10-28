@@ -23,7 +23,7 @@ import urllib.error
 import urllib.request
 import uuid
 
-REPOSITORY = 'https://github.com/vincentinogec/chessgym-community.git'
+REPOSITORY = 'https://github.com/labbeast/chessgym-community.git'
 RELEASE = re.compile(r'v?(\d+)\.(\d+)\.(\d+)(?:-(alpha|beta|rc)\.(\d+))?\Z')
 COMMIT = re.compile(r'[a-f0-9]{40}\Z')
 PROTECTED = {'.git', '.venv', 'data', 'engines', 'output', '.tmp', '.env', 'backups', 'node_modules'}
@@ -105,7 +105,7 @@ def installation(root):
 def _origin(root):
     remote = git(root, 'remote', 'get-url', 'origin')
     if remote not in (REPOSITORY, REPOSITORY.removesuffix('.git'),
-                      'git@github.com:vincentinogec/chessgym-community.git'):
+                      'git@github.com:labbeast/chessgym-community.git'):
         raise ValueError('La mise à jour exige le dépôt officiel de ChessGym comme origine.')
     return remote
 

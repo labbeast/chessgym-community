@@ -83,7 +83,7 @@ Windows is the development and test environment. The Linux instructions below us
 Install Python 3.12 and Git. In PowerShell:
 
 ```powershell
-git clone https://github.com/vincentinogec/chessgym-community.git
+git clone https://github.com/labbeast/chessgym-community.git
 cd chessgym-community
 py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
@@ -143,7 +143,7 @@ Engine versions are retained, and a selection changed during a download is respe
 
 The separate **Update ChessGym automatically every week** option is disabled initially. When enabled, preparation runs while the server is active; restart waits for at least five minutes without API activity and for analyses, imports, resource installations and backups to finish. A prepared version is also applied on the next normal launch. Settings show progress, failures and any required action.
 
-Application updates require Git, access to `github.com/vincentinogec/chessgym-community`, an unmodified checkout on a branch, and startup through `run.py` or the supplied launcher. Local code changes, divergent history, source archives without Git, or a directly launched Uvicorn process prevent automatic application replacement. Updates follow newer published versions, including preview versions when the installed version is itself a preview. They do not follow every development commit.
+Application updates require Git, access to `github.com/labbeast/chessgym-community`, an unmodified checkout on a branch, and startup through `run.py` or the supplied launcher. Local code changes, divergent history, source archives without Git, or a directly launched Uvicorn process prevent automatic application replacement. Updates follow newer published versions, including preview versions when the installed version is itself a preview. They do not follow every development commit.
 
 Choose an interface language under **Settings → General → Language**. The choice is saved in ChessGym and on the device for the next visit. Arabic uses right-to-left layout while the chessboard, notation and FEN/PGN fields retain their chess orientation. Translation catalogues are included locally; changing language does not make a translation-service request or alter imported content.
 

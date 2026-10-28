@@ -182,10 +182,12 @@ def test_statistics_projection_avoids_solutions_and_applies_mastery(database,mon
     assert not any('SELECT * FROM review_cards' in sql or 'SELECT h.*' in sql for sql in statements)
 
 
-def test_sessions_and_resources_api_are_private_and_validate_global_preferences(database,monkeypatch):
+@pytest.mark.parametrize('cpu_count,import_workers,engine_threads', [(2,1,1),(8,2,3)])
+def test_sessions_and_resources_api_are_private_and_validate_global_preferences(database,monkeypatch,cpu_count,import_workers,engine_threads):
     import app,jobs,resource_policy
     from local_test_client import TestClient
     monkeypatch.setattr(jobs,'start_worker',lambda:None)
+    monkeypatch.setattr(resource_policy,'hardware_snapshot',lambda:{'cpu_count':cpu_count,'cpu_known':True,'memory_mb':8192,'memory_known':True})
     monkeypatch.setattr(resource_policy,'_CURRENT',resource_policy.defaults())
     monkeypatch.setattr(resource_policy,'_DESIRED',resource_policy.defaults())
 
@@ -205,4 +207,6 @@ def test_sessions_and_resources_api_are_private_and_validate_global_preferences(
         assert len(second['cards'])==4 and second['cards'][0]['session_index']==20
         assert client.get('/api/review-sessions/'+value['session_id']+'?limit=1001').status_code==422
         assert client.patch('/api/preferences',json={'study_day':{'start_hour':True}}).status_code==400
-        assert client.patch('/api/resource-settings',json={'profile':'custom','total_threads':8,'hash_mb':256,'import_workers':2}).json()['effective']['engine_threads']==3
+        resources=client.patch('/api/resource-settings',json={'profile':'custom','total_threads':cpu_count,'hash_mb':256,'import_workers':import_workers})
+        assert resources.status_code==200,resources.text
+        assert resources.json()['effective']['engine_threads']==engine_threads

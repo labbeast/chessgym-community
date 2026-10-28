@@ -162,17 +162,23 @@ def test_cancel_preserves_committed_games_and_reports_partial_result(store, monk
     assert sync.sync_account(Context(), {'account_id':saved['id']})['imported'] == 1
 
 
-def test_connection_changed_during_download_imports_nothing(store, monkeypatch):
+@pytest.mark.parametrize('patch', [{'base_id': 2}, {'site': 'chesscom'}, {'username': 'changed'}])
+def test_connection_changed_during_download_imports_nothing(store, monkeypatch, patch):
+    # Windows can return the same clock value for two consecutive changes.
+    monkeypatch.setattr(sync, '_now', lambda: '2026-10-28T12:00:00+00:00')
     saved = account()
     def altered(*args,**kwargs):
-        sync.update_account(saved['id'], {'base_id':2})
+        changed = sync.update_account(saved['id'], patch)
+        assert changed['updated_at'] == saved['updated_at']
         return {'games':[record()]}
     monkeypatch.setattr(sync_remote, 'download_games', altered)
     with pytest.raises(jobs.JobCancelled):
         sync.sync_account(Context(), {'account_id':saved['id']})
     with db.get_conn() as conn:
         assert conn.execute('SELECT count(*) FROM entries').fetchone()[0] == 0
-    assert sync.list_accounts()['accounts'][0]['last_error'] is None
+    current = sync.list_accounts()['accounts'][0]
+    assert current['last_error'] is None and current['last_result'] is None
+    assert all(current[key] == value for key, value in patch.items())
 
 
 def test_auto_analysis_only_for_new_games_and_failure_does_not_stop_import(store, monkeypatch):

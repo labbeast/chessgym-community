@@ -25,7 +25,7 @@ export function languageSettingsHtml(){
 }
 function sourceSettingsHtml(status={}){
  const version=status.version?' <bdi dir="ltr">'+esc(status.version)+'</bdi>':'';
- return '<section class="panel settings-width"><h2>ChessGym'+version+'</h2><p class="hint"><a href="https://github.com/vincentinogec/chessgym-community" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://github.com/vincentinogec/chessgym-community/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">AGPL-3.0-or-later</a></p></section>';
+ return '<section class="panel settings-width"><h2>ChessGym'+version+'</h2><p class="hint"><a href="https://github.com/labbeast/chessgym-community" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://github.com/labbeast/chessgym-community/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">AGPL-3.0-or-later</a></p></section>';
 }
 export function globalSettingsHtml({preferences={},status={},bases=[],theme='copper'}={}){
  const appearance=appearanceSettingsHtml({...preferences,theme:preferences.theme||theme});
